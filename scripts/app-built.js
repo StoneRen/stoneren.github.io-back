@@ -402,13 +402,12 @@ define('search',['jquery', 'util'], function($, util) {
 require([
   'jquery',
   'util',
-  'chart',
   'registerSW',
   'fancybox',
   'confirm',
   'share',
   'search'
-], function($, util,  chart) {
+], function($, util) {
   'use strict'
 
   // 阻止冒泡
@@ -582,144 +581,7 @@ require([
       })
     }
 
-    // pv表格
-    if (
-      HUHU_CONFIG.baidu_tongji &&
-      HUHU_CONFIG.baidu_tongji.site_id &&
-      HUHU_CONFIG.baidu_tongji.access_token &&
-      chart
-    ) {
-      function prefix(date) {
-        date = date + ''
-        return date.length === 1 ? '0' + date : date
-      }
 
-      function setStatic(key, data) {
-        // 过期时间为当天的24点
-        var zero = new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 // new Date().toLocaleDateString() "2019/11/18"
-        var now = new Date().getTime()
-        var SEARCH_EXPIRE = zero - now
-        util.STORAGE.getInstance().set(key, data, SEARCH_EXPIRE)
-      }
-
-      // 近日七天访问PV、UV
-      var BAIDU_CHART = 'BAIDU_CHART'
-      var date = new Date()
-      var start = new Date(date.getTime() - 60 * 60 * 1000 * 24 * 6)
-      var start_date = `${start.getFullYear()}${start.getMonth() + 1}${prefix(start.getDate())}`
-      var end_date = `${date.getFullYear()}${prefix(date.getMonth() + 1)}${prefix(date.getDate())}`
-      var url = `https://openapi.baidu.com/rest/2.0/tongji/report/getData?access_token=${HUHU_CONFIG.baidu_tongji.access_token}&site_id=${HUHU_CONFIG.baidu_tongji.site_id}&method=overview/getTimeTrendRpt&start_date=${start_date}&end_date=${end_date}&metrics=pv_count,visitor_count`
-
-      function getChartData() {
-        var data = util.STORAGE.getInstance().get(BAIDU_CHART)
-        if (data) {
-          return Promise.resolve(data)
-        } else {
-          return $.ajax({
-            url: url,
-            dataType: 'jsonp',
-            jsonp: 'callback'
-          })
-        }
-      }
-
-      getChartData().then(data => {
-        if (data && data.result && data.result.items) {
-          setStatic(BAIDU_CHART, data)
-          var pv = []
-          var uv = []
-
-          data.result.items[1] &&
-            data.result.items[1].map(value => {
-              pv.push(value[0])
-              uv.push(value[1])
-            })
-
-          var dom = document.getElementById('line-chart')
-          var ctx = dom ? dom.getContext('2d') : null
-          ctx &&
-            new chart(ctx, {
-              type: 'line',
-              data: {
-                labels: data.result.items[0],
-                datasets: [
-                  {
-                    label: 'PV',
-                    data: pv,
-                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-                    borderColor: ['rgba(54, 162, 235, 1)'],
-                    borderWidth: 2
-                  },
-                  {
-                    label: 'UV',
-                    data: uv,
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-                    borderColor: ['rgba(255, 99, 132, 1)'],
-                    borderWidth: 2
-                  }
-                ]
-              },
-              options: {
-                title: {
-                  display: true,
-                  text: '近七天访问'
-                }
-              }
-            })
-        }
-      })
-
-      // 统计整站PV、UV
-      var SITE_PV_UV = 'SITE_PV_UV'
-      var all_start_date = new Date(HUHU_CONFIG.baidu_tongji.site_from || new Date())
-      var format_start_date = `${all_start_date.getFullYear()}${prefix(all_start_date.getMonth() + 1)}${prefix(
-        all_start_date.getDate()
-      )}`
-
-      var site_date = parseInt(Math.abs(date.getTime() - all_start_date.getTime()) / 1000 / 60 / 60 / 24)
-      $('.site_from').html(HUHU_CONFIG.baidu_tongji.site_from || '')
-      $('.site_date').html(site_date || '')
-      var all_url = `https://openapi.baidu.com/rest/2.0/tongji/report/getData?access_token=${HUHU_CONFIG.baidu_tongji.access_token}&site_id=${HUHU_CONFIG.baidu_tongji.site_id}&method=source/all/a&start_date=${format_start_date}&end_date=${end_date}&metrics=pv_count,visitor_count`
-      function getAllData() {
-        var data = util.STORAGE.getInstance().get(SITE_PV_UV)
-        if (data) {
-          return Promise.resolve(data)
-        } else {
-          return $.ajax({
-            url: all_url,
-            dataType: 'jsonp',
-            jsonp: 'callback'
-          })
-        }
-      }
-
-      getAllData().then(data => {
-        setStatic(SITE_PV_UV, data)
-        if (data && data.result && data.result.pageSum && data.result.items) {
-          $('.site_pv').html(data.result.pageSum[0][0] || '')
-          $('.site_uv').html(data.result.pageSum[0][1] || '')
-          var labels = []
-          var datasets = []
-          data.result.items[0].map(item => labels.push(item[0].name))
-          data.result.items[1].map(item => datasets.push(item[0]))
-          var dom = document.getElementById('doughnut-chart')
-          var ctx = dom ? dom.getContext('2d') : null
-          ctx &&
-            new chart(ctx, {
-              type: 'doughnut',
-              data: {
-                labels: labels,
-                datasets: [
-                  {
-                    data: datasets,
-                    backgroundColor: ['#d7ecfb', '#ffd8e1', '#e6d9ff']
-                  }
-                ]
-              }
-            })
-        }
-      })
-    }
   })
 })
 ;

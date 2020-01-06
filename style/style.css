@@ -626,12 +626,6 @@ a {
 .post-wrap dt {
   font-weight: bold;
 }
-.post-entry #myChart,
-.post-wrap #myChart,
-.post-entry #doughnut-chart,
-.post-wrap #doughnut-chart {
-  margin: 1.5rem 0;
-}
 #post-toc {
   position: fixed;
   top: 15%;
