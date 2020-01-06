@@ -14,7 +14,7 @@ var PRE_CACHE_FILES = [
   '/2018082231017',
   '/scripts/app.js',
   '/scripts/util.js',
-  '/scripts/cdn/Valine.min.js'
+  // '/scripts/cdn/Valine.min.js'
 ]
 
 // 监听message
@@ -59,7 +59,6 @@ function fetchPreCache() {
   if (!PRE_CACHE_FILES || PRE_CACHE_FILES.length === 0) {
     return Promise.resolve()
   } else {
-    console.log(2222)
     return caches.open(CACHE_NAME).then(function(cache) {
       return cache.keys().then(function(list) {
         if (list && list.length > 0) {

@@ -1,31 +1,14 @@
 require([
   'jquery',
   'util',
-  'valine',
   'chart',
   'registerSW',
   'fancybox',
   'confirm',
   'share',
   'search'
-], function($, util, valine, chart) {
+], function($, util,  chart) {
   'use strict'
-
-  // valine评论
-  var API_ID = (HUHU_CONFIG.valine && HUHU_CONFIG.valine.API_ID) || ''
-  var API_KEY = (HUHU_CONFIG.valine && HUHU_CONFIG.valine.API_KEY) || ''
-  if (API_ID && API_KEY) {
-    new valine({
-      el: '#comment',
-      appId: HUHU_CONFIG.valine.API_ID,
-      appKey: HUHU_CONFIG.valine.API_KEY,
-      notify: false,
-      visitor: true,
-      recordIP: true,
-      avatar: 'mp',
-      placeholder: '骑士很煎蛋、骑士很孜然'
-    })
-  }
 
   // 阻止冒泡
   function stopPropagation(e) {
