@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      photo频道新上分页功能 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/2187168?s=40&amp;v=4" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- <canvas id='pagemap'></canvas> -->
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分页"><span class="toc-text">分页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决1-yilia模板的改造"><span class="toc-text">解决1: yilia模板的改造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#去掉默认调用photoswipe"><span class="toc-text">去掉默认调用photoswipe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在photo页面调用photoswipe"><span class="toc-text">在photo页面调用photoswipe</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决2-photoswipe的图片自适应"><span class="toc-text">解决2: photoswipe的图片自适应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <!-- <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div> -->
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">photo频道新上分页功能</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/09/18</span>
+        </span>
+
+        
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/vue">vue</a>
+                  
+                
+                  
+                    <a href="/tags/hexo">hexo</a>
+                  
+                
+                  
+                    <a href="/tags/photoswipe">photoswipe</a>
+                  
+                
+                  
+                    <a href="/tags/pager">pager</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>在之前上线了<a href="/photo">记录</a>频道,主要存放一些记录生活的照片.</p>
+<p>一开始搭建非常简单,就是一个<code>photo.js</code>数据文件,然后用<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue</a>进行页面渲染.</p>
+<p>这段代码简直太简单了,可以查看线上<a href="https://github.com/StoneRen/stoneren.github.io/blob/7c1432789d54eefc618bfa24a0fd9945c9068bbf/photo/photo.js" target="_blank" rel="noopener">源码</a>:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> app = <span class="hljs-keyword">new</span> Vue({<br>  <span class="hljs-attr">el</span>: <span class="hljs-string">"#photo-box"</span>,<br>  <span class="hljs-attr">data</span>: {<br>    <span class="hljs-attr">loaded</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">photos</span>: data<br>  }<br>});<br></code></pre></td></tr></tbody></table></figure>
+
+<p>当然中间还有一个用<code>冒泡排序</code>对数据进行排序的过程,主要是自己懒的按照时间进行数据排列.所以<code>懒</code>才是技术进步的推动力.</p>
+<p><a href="https://ss.jiasucloud.com/blog/image/lan06v05e7v8.gif-s" target="_blank" rel="noopener" data-caption="懒" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/lan06v05e7v8.gif-s" alt="懒"></a></p>
+<p>但是记录越添加越多,页面加载和展示倒是没有问题.但是页面元素太多,看的确实烦心.或许是处女座的特点吧,一定要再吹毛求疵一下.</p>
+<p><a href="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fae0b431b7g204x04x0ul.gif-s" target="_blank" rel="noopener" data-caption="吹毛求疵" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fae0b431b7g204x04x0ul.gif-s" alt="吹毛求疵"></a></p>
+<p>本文解决三个问题: <code>vue分页</code>,<code>yilia模板viewer修改</code>和<code>photoswipe的图片尺寸自适应</code></p>
+<a id="more"></a>
+
+
+<h2 id="分页">分页<a class="post-anchor" href="#分页"></a></h2><p>有了<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">vue</a>这个神器,分页功能简直小菜一碟.三下五除二就可以搞定.代码如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> app = <span class="hljs-keyword">new</span> Vue({<br> <span class="hljs-attr">data</span>: {<br>	<span class="hljs-attr">page</span>:<span class="hljs-number">1</span>,<br>	<span class="hljs-attr">limit</span>:<span class="hljs-number">10</span><br> }.<br> methods: {<br>    render() {<br>      <span class="hljs-keyword">var</span> index = (<span class="hljs-keyword">this</span>.page - <span class="hljs-number">1</span>) * <span class="hljs-keyword">this</span>.limit;<br>      <span class="hljs-keyword">var</span> photos = (<span class="hljs-keyword">this</span>.photos = data.slice(index, index + <span class="hljs-keyword">this</span>.limit));<br>    },<br>    prev() {<br>      <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.page - <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.page < <span class="hljs-number">1</span>) {<br>        <span class="hljs-keyword">this</span>.page = <span class="hljs-number">1</span>;<br>      }<br>      <span class="hljs-keyword">this</span>.render();<br>    },<br>    next() {<br>      <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.page + <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.page > <span class="hljs-keyword">this</span>.pageMax) {<br>        <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.pageMax;<br>      }<br>      <span class="hljs-keyword">this</span>.render();<br>    }<br>  },<br>  created() {<br>    <span class="hljs-keyword">this</span>.pageMax = <span class="hljs-built_in">Math</span>.ceil(data.length / <span class="hljs-keyword">this</span>.limit);<br>    <span class="hljs-keyword">this</span>.render();<br>  }<br>})<br></code></pre></td></tr></tbody></table></figure>
+<p>上面就是最简单的一个分页展示的功能.</p>
+<h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>因为在<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>模板中,作者自带了<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>库,可以看<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>中的<a href="https://github.com/litten/hexo-theme-yilia/blob/master/source-src/js/viewer.js" target="_blank" rel="noopener">源码</a>.所以我点击图片的时候用了<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>来进行展示.</p>
+<p>这个带来的问题是什么呢.我每次翻页后,页面中的数据<code>photos</code>每次都变化了,但是<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>的变化是有问题.因为<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>作者可能认为他翻页是整个页面改变,不是在页内变化.所以作者的<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>的<code>items</code>是通过查找dom元素来填充的.</p>
+<p>具体看一下作者的<a href="https://github.com/litten/hexo-theme-yilia/blob/master/source-src/js/viewer.js" target="_blank" rel="noopener">源码</a>:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> $imgArr = <span class="hljs-built_in">document</span>.querySelectorAll((<span class="hljs-string">'.article-entry img:not(.reward-img)'</span>))<br><br>$imgArr.forEach(<span class="hljs-function">(<span class="hljs-params">$em, i</span>) =></span> {<br>	$em.onclick = <span class="hljs-function"><span class="hljs-params">()</span> =></span> {<br>		<span class="hljs-comment">// slider展开状态</span><br>		<span class="hljs-comment">// todo: 这样不好，后面改成状态</span><br>		<span class="hljs-keyword">if</span> (<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'.left-col.show'</span>)) <span class="hljs-keyword">return</span><br>		<span class="hljs-keyword">let</span> items = []<br>		$imgArr.forEach(<span class="hljs-function">(<span class="hljs-params">$em2, i2</span>) =></span> {<br>			<span class="hljs-keyword">let</span> img = $em2.getAttribute(<span class="hljs-string">'data-idx'</span>, i2)<br>			<span class="hljs-keyword">let</span> src = $em2.getAttribute(<span class="hljs-string">'data-target'</span>) || $em2.getAttribute(<span class="hljs-string">'src'</span>)<br>			<span class="hljs-keyword">let</span> title = $em2.getAttribute(<span class="hljs-string">'alt'</span>)<br>			items.push({<br>				<span class="hljs-attr">src</span>: src,<br>				<span class="hljs-attr">w</span>: $em2.width,<br>				<span class="hljs-attr">h</span>: $em2.height,<br>				<span class="hljs-attr">title</span>: title<br>			})<br>		})<br>		<span class="hljs-keyword">var</span> gallery = <span class="hljs-keyword">new</span> PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {<br>			<span class="hljs-attr">index</span>: <span class="hljs-built_in">parseInt</span>(i)<br>		});<br>		gallery.init()<br>	}<br>})<br></code></pre></td></tr></tbody></table></figure>
+<p>这样做有2个问题:</p>
+<ol>
+<li>如果如果下一页的数据比上一页的数据少的话,通过作者的代码源码看,只是会改变<code>items</code>中已经存在的值.也就是如果第一页10张图片,<code>items</code>长度为10,第二页只有一张图片的话,<code>items</code>的长度还是为10,只不过,改变了<code>items[0]</code>的值.这是不对的</li>
+<li>因为我每张图片都不固定大小,就不能在初始化的时候制定尺寸.导致直接点击展示,看到的景象简直惨不忍睹,如果需要实时自适应图片大小的话,还得修改photoswiper代码.</li>
+</ol>
+<p>那就动手改造吧.</p>
+<h2 id="解决1-yilia模板的改造">解决1: yilia模板的改造<a class="post-anchor" href="#解决1-yilia模板的改造"></a></h2><h3 id="去掉默认调用photoswipe">去掉默认调用<code>photoswipe</code><a class="post-anchor" href="#去掉默认调用photoswipe"></a></h3><p>因为我在页面中的图片不需要点击查看大图,所以我坚决的去掉了普通页面的<code>viewer</code>加载.<br>在<code>themes/yilia/source-src/js/main.js</code>去掉初始化调用.</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">addLoadEvent(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>	Share.init()<br>	<span class="hljs-comment">//Viewer.init()</span><br>	Aside.init()<br>})<br></code></pre></td></tr></tbody></table></figure>
+<p>这样所有页面就不会调用<code>viewer</code>了.</p>
+<h3 id="在photo页面调用photoswipe">在<a href="/photo">photo</a>页面调用<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a><a class="post-anchor" href="#在photo页面调用photoswipe"></a></h3><p>在<code>source/photo/index.ejs</code>中按照<a href="https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/getting-started.md" target="_blank" rel="noopener">官方指导</a>,进行<a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>设置</p>
+<p><code>photo.js</code>改造如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> app = <span class="hljs-keyword">new</span> Vue({<br><span class="hljs-attr">methods</span>: {<br>    view(index) {<br>      gallery = <span class="hljs-keyword">new</span> PhotoSwipe(pswpElement, PhotoSwipeUI_Default, <span class="hljs-keyword">this</span>.items, {<br>        <span class="hljs-attr">index</span>: index<br>      });<br>      gallery.init();<br>    },<br>    render() {<br>      <span class="hljs-keyword">var</span> index = (<span class="hljs-keyword">this</span>.page - <span class="hljs-number">1</span>) * <span class="hljs-keyword">this</span>.limit;<br>      <span class="hljs-keyword">var</span> photos = (<span class="hljs-keyword">this</span>.photos = data.slice(index, index + <span class="hljs-keyword">this</span>.limit));<br>      <span class="hljs-keyword">var</span> items = [];<br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, l = photos.length; i < l; i++) {<br>        <span class="hljs-keyword">var</span> photo = photos[i];<br>        <span class="hljs-keyword">if</span> (photo.type !== <span class="hljs-string">"video"</span>) {<br>          photo.index = items.length;<br>          items.push({<br>            <span class="hljs-attr">title</span>: photo.title + <span class="hljs-string">" "</span> + photo.date + <span class="hljs-string">" @"</span> + photo.location,<br>            <span class="hljs-attr">src</span>: <span class="hljs-keyword">this</span>.qnroot + photo.url + <span class="hljs-string">"-p"</span>,<br>            <span class="hljs-attr">w</span>: <span class="hljs-number">-1</span>,<br>            <span class="hljs-attr">h</span>: <span class="hljs-number">-1</span><br>          });<br>        }<br>      }<br>      <span class="hljs-keyword">this</span>.items = items;<br>    },<br>    prev() {<br>      <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.page - <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.page < <span class="hljs-number">1</span>) {<br>        <span class="hljs-keyword">this</span>.page = <span class="hljs-number">1</span>;<br>      }<br>      <span class="hljs-keyword">this</span>.render();<br>    },<br>    next() {<br>      <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.page + <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.page > <span class="hljs-keyword">this</span>.pageMax) {<br>        <span class="hljs-keyword">this</span>.page = <span class="hljs-keyword">this</span>.pageMax;<br>      }<br>      <span class="hljs-keyword">this</span>.render();<br>    }<br>  },<br>  created() {<br>    <span class="hljs-keyword">this</span>.pageMax = <span class="hljs-built_in">Math</span>.ceil(data.length / <span class="hljs-keyword">this</span>.limit);<br>    pswpElement = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">".pswp"</span>)[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">this</span>.render();<br>  }<br> });<br></code></pre></td></tr></tbody></table></figure>
+<p>为了解决上面的问题1,就是<code>第12行</code>代码到<code>第25行</code>代码做的事情.也就是说作者原来填充数据是用dom元素填充的,翻页之后其实只会改变原有所有内容.<br>我先把数据清空,然后拿到什么数据就塞什么数据到<code>items</code>,不多不少.第一个问题解决</p>
+<h2 id="解决2-photoswipe的图片自适应">解决2: <a href="https://github.com/dimsemenov/PhotoSwipe" target="_blank" rel="noopener">photoswipe</a>的图片自适应<a class="post-anchor" href="#解决2-photoswipe的图片自适应"></a></h2><p>有了上面的改造,数据传递是没有问题了.但所有图片都不是固定大小的.所以页面展示图片的时候非常难看.</p>
+<p>按照官方指导修改如下,添加<code>imageLoadComplete</code>事件监听:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">view(index) {<br>  gallery = <span class="hljs-keyword">new</span> PhotoSwipe(pswpElement, PhotoSwipeUI_Default, <span class="hljs-keyword">this</span>.items, {<br>    <span class="hljs-attr">index</span>: index<br>  });<br>  gallery.init();<br>  gallery.listen(<span class="hljs-string">"imageLoadComplete"</span>, resizeImg);<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>重点<code>resize</code>代码如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resizeImg</span>(<span class="hljs-params">index, item</span>) </span>{<br>    <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> Image();<br>    img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>      item.w = <span class="hljs-keyword">this</span>.width;<br>      item.h = <span class="hljs-keyword">this</span>.height;<br>      <span class="hljs-keyword">try</span> {<br>        item.loaded2 = <span class="hljs-literal">true</span>;<br>        gallery.invalidateCurrItems();<br>        gallery.updateSize(<span class="hljs-literal">true</span>);<br>      } <span class="hljs-keyword">catch</span> (error) {<br>        <span class="hljs-comment">//console.log(error);</span><br>      }<br>    };<br>    img.src = item.src;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>ok,现在终于图片能自适应了,不论你什么尺寸,我都能完美展示了.<br>可以吐一口气了吗?</p>
+<p>结果点击放大缩小的时候又出现问题了.</p>
+<p>因为图片比较大,点击之后,图片会进行放大.这个是正常操作,不正常的是,在这个页面中<code>放大之后不到1秒就又恢复原来尺寸</code>.这个问题看起来比较恶心,一定也要解决这个问题.</p>
+<p>而去掉<code>imageLoadComplete</code>之后,放大没有问题,尺寸只适应又出问题了.极力推荐<a href="https://ss.jiasucloud.com/blog/photo/PANO_20170312_132021.jpg-p" target="_blank" rel="noopener">我用小米手机拍摄的这张图</a>,没用任何滤镜处理,大自然真是太美了.这还是已经压缩了80%,但是效果还是这么迷人,点击放大后,细节虽然有损失,但绝对很惊艳.</p>
+<p>那就改造一下吧,也很简单:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resizeImg</span>(<span class="hljs-params">index, item</span>) </span>{<br>  <span class="hljs-keyword">if</span> (!item.loaded2) {<br>    <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> Image();<br>    img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>      item.w = <span class="hljs-keyword">this</span>.width;<br>      item.h = <span class="hljs-keyword">this</span>.height;<br>      <span class="hljs-keyword">try</span> {<br>        item.loaded2 = <span class="hljs-literal">true</span>;<br>        gallery.invalidateCurrItems();<br>        gallery.updateSize(<span class="hljs-literal">true</span>);<br>      } <span class="hljs-keyword">catch</span> (error) {<br>        <span class="hljs-comment">//console.log(error);</span><br>      }<br>    };<br>    img.src = item.src;<br>  }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="注意">注意<a class="post-anchor" href="#注意"></a></h2><p>当然,修改<code>theme/yilia/</code>中任何文件的时候,你需要重新编译一下模板.执行以下命令</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 跳到模板根目录</span><br><span class="hljs-built_in">cd</span> theme/yilia<br>webpack --progress --colors<br></code></pre></td></tr></tbody></table></figure>
+<p>其实作者还有一个问题,就是在重新编译的时候,没有进行<code>clean</code>所以没如果你有洁癖的话,在编译之前,先把<code>theme/yilia/source</code>下的文件清空以下.</p>
+<p>还有不懂的,看一下线上<a href="https://github.com/StoneRen/stoneren.github.io/blob/master/photo/photo.js" target="_blank" rel="noopener">源码</a>吧</p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/2017/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E4%B9%A0%E9%A2%982-%E6%A8%A1%E4%BB%BFinstagram%E6%BB%A4%E9%95%9C/">深度学习自习题2-模仿instagram滤镜</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/2017/go%E8%AF%AD%E8%A8%80%E7%BB%83%E4%B9%A0%E9%A2%98-%E4%B8%80/">Go语言练习题 (一)</a>
+        
+    </div>
+  </div>
+
+  
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/2017/photo%E9%A2%91%E9%81%93%E6%96%B0%E4%B8%8A%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/">https://stoneren.github.io/article/2017/photo%E9%A2%91%E9%81%93%E6%96%B0%E4%B8%8A%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

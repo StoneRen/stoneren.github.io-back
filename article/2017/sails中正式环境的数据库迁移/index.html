@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <title>
+      sails中正式环境的数据库迁移 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/2187168?s=40&amp;v=4" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <!-- <canvas id='pagemap'></canvas> -->
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题来源"><span class="toc-text">问题来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体操作"><span class="toc-text">具体操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysqldiff"><span class="toc-text">mysqldiff</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysqldiff的nodejs版本"><span class="toc-text">mysqldiff的nodejs版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整个更新流程"><span class="toc-text">整个更新流程</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <!-- <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div> -->
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+        <div class="top">
+          <div class="iconfont icon-zuirehotxiankuang animated infinite heartBeat"></div>
+        </div>
+      
+      <div class="title">sails中正式环境的数据库迁移</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/07/24</span>
+        </span>
+
+        
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/jenkins">jenkins</a>
+                  
+                
+                  
+                    <a href="/tags/sails">sails</a>
+                  
+                
+                  
+                    <a href="/tags/orm">orm</a>
+                  
+                
+                  
+                    <a href="/tags/mysqldiff">mysqldiff</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>在我的上一篇文章 <a href="https://stoneren.github.io/2017/07/21/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a> 中,在结尾处埋了一个坑.当时也说了是一个妥协方案.</p>
+<p>今天正式按照上面的思路来说一下新的解决方案.</p>
+<h2 id="问题来源">问题来源<a class="post-anchor" href="#问题来源"></a></h2><p>在<code>sails</code>中,自带的<code>orm</code>系统<a href="http://github.com/balderdashy/waterline" target="_blank" rel="noopener">waterline</a>中会对数据的完整性进行检测.但是其中有一个缺点就是在检测的过程,可能会发生<code>数据丢失</code>的严重问题.所以官方也验证声明,一定不要在<code>prod环境</code>和<code>你十分在意的数据</code>情况下使用自动升级方式.具体原因查看文章 <a href="https://stoneren.github.io/2017/07/21/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a>.</p>
+<a id="more"></a>
+<h2 id="解决方案">解决方案<a class="post-anchor" href="#解决方案"></a></h2><p>在 <a href="https://stoneren.github.io/2017/07/21/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a> 中,想<code>鱼和熊掌兼得</code>.<code>鱼</code>就是<code>自动迁移</code>在没有专业数据库人员的情况下对数据库的操作非常方便,<code>熊掌</code>就是想在<code>自动升级</code>的过程中,保证数据库不会超时,一定保证不能丢数据.</p>
+<p>下面就是实现步骤:</p>
+<ol>
+<li>在<code>测试环境</code>下,用<code>自动迁移</code>,更新数据结构</li>
+<li>把<code>测试环境</code>下的数据结构迁移到<code>正式环境</code></li>
+</ol>
+<h2 id="具体操作">具体操作<a class="post-anchor" href="#具体操作"></a></h2><h3 id="mysqldiff">mysqldiff<a class="post-anchor" href="#mysqldiff"></a></h3><p><code>数据结构的迁移</code>之前的时候算是孤陋寡闻,结果才有之前的妥协方案.现在有了神器<code>mysqldiff</code>.</p>
+<h4 id="安装">安装<a class="post-anchor" href="#安装"></a></h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">sudo apt-get install mysql-utilities<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="使用">使用<a class="post-anchor" href="#使用"></a></h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysqldiff --server1=root@host1 --server2=root@host2 --difftype=sql db1.table1:dbx.table3<br></code></pre></td></tr></tbody></table></figure>
+<p>结果如下:</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># WARNING: Using a password on the command line interface can be insecure.</span><br><span class="hljs-comment"># server1 on rm-m5euj0nmzs741s611.mysql.rds.aliyuncs.com: ... connected.</span><br><span class="hljs-comment"># Comparing test_wacao_api.user to wacao_api.user                  [FAIL]</span><br><span class="hljs-comment"># Transformation for --changes-for=server2:</span><br><span class="hljs-comment">#</span><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`db1`</span>.<span class="hljs-string">`user`</span><br>  <span class="hljs-keyword">DROP</span> PRIMARY <span class="hljs-keyword">KEY</span>,<br>  <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> openid,<br>  <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> phone,<br>  <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">INDEX</span> unionid,<br>  <span class="hljs-keyword">ADD</span> PRIMARY <span class="hljs-keyword">KEY</span>(<span class="hljs-string">`id`</span>),<br>  <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> unionid (unionid),<br>  <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> phone (phone),<br>  <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">INDEX</span> openid (openid);<br></code></pre></td></tr></tbody></table></figure>
+
+<h4 id="问题">问题<a class="post-anchor" href="#问题"></a></h4><p>在此期间碰到简单的问题:</p>
+<ol>
+<li>跳过id的自增数据值 <code>--skip-table-options</code><br>如果不添加此参数,假如测试数据20条,正式环境1条,系统会更改正式环境下的id从21开始,这个不是我们的需求,所以添加本参数</li>
+<li>顺序不同也会判定为不一样,导致需要重新修改<br>这个暂时没有找到解决方案.类似于上面的展示,判断出来的不同,其实是相同的,只是因为二者生成字段的顺序不同,导致需要进行修改.这个希望有人能教导解决办法</li>
+</ol>
+<h3 id="mysqldiff的nodejs版本">mysqldiff的<code>nodejs</code>版本<a class="post-anchor" href="#mysqldiff的nodejs版本"></a></h3><p>上面第二个问题,让我十分不爽.毕竟每次都修改唯一索引的话,对我改动太大,时间也比较长.幸好搜到一个国人写的<code>nodejs</code>版本的<code>mysqldiff</code>.具体可以查看项目主页<a href="https://github.com/LiveXY/mysqldiff" target="_blank" rel="noopener">github</a>.下面是核心代码展示,访问<a href="https://github.com/LiveXY/mysqldiff/blob/master/mysqldiff#L50" target="_blank" rel="noopener">代码</a></p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">Promise</span>.all([getTables(), getParameters(), getViews(), getDatas()]).then(allDesc).then(diff).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) </span>{<br><span class="hljs-keyword">if</span> (v.sqlUp && (program.diff == <span class="hljs-string">'table'</span> || !program.diff)) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Database db2 needs to update the table structure:'</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> v.sql) <span class="hljs-built_in">console</span>.log(v.sql[k]);<br>}<br><span class="hljs-keyword">if</span> (v.procUp && (program.diff == <span class="hljs-string">'procedure'</span> || !program.diff)) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Database db2 need to update the stored procedure:'</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> v.proc) <span class="hljs-built_in">console</span>.log(v.proc[k]);<br>}<br><span class="hljs-keyword">if</span> (v.funcUp && (program.diff == <span class="hljs-string">'function'</span> || !program.diff)) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Database db2 need to update the function:'</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> v.func) <span class="hljs-built_in">console</span>.log(v.func[k]);<br>}<br><span class="hljs-keyword">if</span> (v.viewUp && (program.diff == <span class="hljs-string">'view'</span> || !program.diff)) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Database db2 needs to update the view:'</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> v.view) <span class="hljs-built_in">console</span>.log(v.view[k]);<br>}<br><span class="hljs-keyword">if</span> (v.dataUp && program.diff && program.diff == <span class="hljs-string">'data'</span>) {<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Database db2 needs to update the data:'</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k <span class="hljs-keyword">in</span> v.data) <span class="hljs-built_in">console</span>.log(v.data[k]);<br>}<br><span class="hljs-keyword">if</span> (!v.sqlUp && !v.procUp && !v.funcUp && !v.viewUp && !v.dataUp)<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'-- Is the latest, do not need to update!'</span>);<br>exit();<br>});<br>}).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) </span>{});<br></code></pre></td></tr></tbody></table></figure>
+<p>使用结果如下:</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- Connecting to the database: db1 & db2 ...</span><br><span class="hljs-comment">-- Database db1: connection successful!</span><br><span class="hljs-comment">-- Database db2: connection success!</span><br><span class="hljs-comment">-- Getting table structure ...</span><br><span class="hljs-comment">-- Getting stored procedures and functions ...</span><br><span class="hljs-comment">-- Getting view ...</span><br><span class="hljs-comment">-- db1 get 18 tables!</span><br><span class="hljs-comment">-- db2 get 17 tables!</span><br><span class="hljs-comment">-- db1 & db2 merge 18 table structure!</span><br><span class="hljs-comment">-- db1 get 0 stored procedures and functions!</span><br><span class="hljs-comment">-- db2 get 0 stored procedures and functions!</span><br><span class="hljs-comment">-- db1 & db2 merge 0 stored procedures!</span><br><span class="hljs-comment">-- db1 & db2 merge 0 functions!</span><br><span class="hljs-comment">-- db1 get 0 views!</span><br><span class="hljs-comment">-- db2 get 0 views!</span><br><span class="hljs-comment">-- db1 & db2 merge 0 views!</span><br><span class="hljs-comment">-- Began to compare db1 & db2 differences ...</span><br><span class="hljs-comment">-- Database db2 needs to update the table structure:</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`test_t`</span> (<br>  <span class="hljs-string">`id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  <span class="hljs-string">`name`</span> <span class="hljs-built_in">text</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)<br>) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8;<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`user`</span> <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">COLUMN</span> <span class="hljs-string">`test`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">200</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="整个更新流程">整个更新流程<a class="post-anchor" href="#整个更新流程"></a></h3><p>通过部署过程,对数据库进行了自动迁移.那么就可以把<code>sails</code>中的<code>prod</code>环境下的迁移方式设置为<code>safe</code></p>
+<p>整个过程大体分为以下几步:</p>
+<ol>
+<li>git拉取新代码</li>
+<li>进行数据库备份</li>
+<li>进行数据结构更新</li>
+<li>pm2 重启</li>
+</ol>
+<p>暂时使用本解决方案.如果发现问题,会及时更新.</p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/2017/%E6%9B%B4%E6%8D%A2yarn%E6%BA%90%E4%B8%BA%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/">更换yarn源为淘宝镜像</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/2017/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a>
+        
+    </div>
+  </div>
+
+  
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/2017/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">https://stoneren.github.io/article/2017/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
