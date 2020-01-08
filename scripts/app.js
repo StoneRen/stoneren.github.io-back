@@ -4,7 +4,7 @@ require([
   'registerSW',
   'fancybox',
   'confirm',
-  'share',
+  // 'share',
   'search'
 ], function($, util) {
   'use strict'
@@ -87,10 +87,10 @@ require([
     // 分享
     $(document).on('click', '.share', function(e) {
       var that = $(this)
-      $().share({
-        url: `${location.origin}${that.data('url')}` || location.href,
-        sites: HUHU_CONFIG.share
-      })
+      // $().share({
+      //   url: `${location.origin}${that.data('url')}` || location.href,
+      //   sites: HUHU_CONFIG.share
+      // })
       stopPropagation(e)
     })
 
