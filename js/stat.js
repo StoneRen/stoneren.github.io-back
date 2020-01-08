@@ -21,11 +21,3 @@
 // })(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
 // ga("create", "UA-104993594-1", "auto");
 // ga("send", "pageview");
-
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-  dataLayer.push(arguments);
-}
-gtag("js", new Date());
-
-gtag("config", "UA-104993594-1");
