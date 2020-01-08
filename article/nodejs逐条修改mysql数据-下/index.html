@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      nodejs逐条修改mysql数据(下) - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#猜测"><span class="toc-text">猜测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-text">解决</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">nodejs逐条修改mysql数据(下)</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/08/22</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/mysql">mysql</a>
+                  
+                
+                  
+                    <a href="/tags/cursor">cursor</a>
+                  
+                
+                  
+                    <a href="/tags/stream">stream</a>
+                  
+                
+                  
+                    <a href="/tags/sql">sql</a>
+                  
+                
+                  
+                    <a href="/tags/pipe">pipe</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>书接<a href="/archive/nodejs%E4%B8%AD%E5%AF%B9mysql%E6%B8%B8%E6%A0%87%E7%9A%84%E6%93%8D%E4%BD%9C/">上文</a>.</p>
+<p>上文中介绍了,针对mysql的逐条数据进行分析.如果你自己真正跑过<a href="https://gist.github.com/StoneRen/b64ff25b43903616ae095dea1961fc8c" target="_blank" rel="noopener">gist</a>上的代码.会发现有问题.<br><a href="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8sehf3x4jj20k00k0q7c.jpg-sm" target="_blank" rel="noopener" data-caption="多读书" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8sehf3x4jj20k00k0q7c.jpg-sm" alt="多读书"></a></p>
+<p>先把代码列在这里,便于下面讨论.至于为什么要用<code>stream</code>,去看上<a href="/archive/nodejs%E4%B8%AD%E5%AF%B9mysql%E6%B8%B8%E6%A0%87%E7%9A%84%E6%93%8D%E4%BD%9C/">一篇文章</a>吧.</p>
+<a id="more"></a>
+
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> stream = <span class="hljs-built_in">require</span>(<span class="hljs-string">'stream'</span>);<br><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);<br><span class="hljs-keyword">var</span> connection = mysql.createConnection({<br>  <span class="hljs-attr">host</span>: <span class="hljs-string">'XX'</span>,<br>  <span class="hljs-attr">user</span>: <span class="hljs-string">'XX'</span>,<br>  <span class="hljs-attr">password</span>: <span class="hljs-string">'XX'</span>,<br>  <span class="hljs-attr">database</span>: <span class="hljs-string">'XX'</span><br>});<br><br><span class="hljs-keyword">var</span> errList = [];<br><br>connection.connect();<br><br>connection.query(<span class="hljs-string">'select id,fans_id,fans_nickname,buyer_id,fans_type,fans_info from yztrade'</span>)<br>  .stream()<br>  .pipe(stream.Transform({<br>    <span class="hljs-attr">objectMode</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">row, encoding, callback</span>) </span>{<br>      <span class="hljs-comment">/**<br>      if (!!row.fans_id) {<br>        callback()<br>      } else {<br>        /**/</span><br>        <span class="hljs-keyword">try</span> {<br>          <span class="hljs-keyword">var</span> fans = <span class="hljs-built_in">JSON</span>.parse(row.fans_info);<br>          <span class="hljs-built_in">console</span>.log(fans.fans_id);<br>          <span class="hljs-keyword">var</span> query = <span class="hljs-string">`UPDATE yztrade SET fans_id=<span class="hljs-subst">${fans.fans_id}</span>,fans_nickname='<span class="hljs-subst">${fans.fans_nickname}</span>',buyer_id=<span class="hljs-subst">${fans.buyer_id}</span>,fans_type=<span class="hljs-subst">${fans.fans_type}</span> where id=<span class="hljs-subst">${row.id}</span>`</span>;<br>          connection.query(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{<br>            <span class="hljs-keyword">if</span> (err) {<br>              errList.push(row.id);<br>            }<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`完成id: <span class="hljs-subst">${row.id}</span>`</span>)<br>            callback();<br>          });<br>        } <span class="hljs-keyword">catch</span> (err) {<br>          errList.push(row.id);<br>          callback();<br>        }<br><br>      <span class="hljs-comment">// }</span><br>    }<br>  }))<br>  .on(<span class="hljs-string">'finish'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    connection.end();<br>    <span class="hljs-keyword">if</span> (errList.length) {<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'未正常处理的id为:'</span>)<br>      <span class="hljs-built_in">console</span>.log(errList)<br>    }<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'end'</span>)<br>  })<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>如果自己跑上面的代码,如果记录多的话,我自己一条一条试验,在30条记录的时候,就无法正常反应了.诡异的是,没有任何报错.用调试工具一步一步走,也没有任何反应.</p>
+<p>最终发现问题出在这段代码.</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">connection.query(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{<br>   <span class="hljs-keyword">if</span> (err) {<br>    errList.push(row.id);<br>   }<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`完成id: <span class="hljs-subst">${row.id}</span>`</span>)<br>  callback();<br> });<br></code></pre></td></tr></tbody></table></figure>
+<p>如果把这段代码去掉,成千上万条记录都没有问题.</p>
+<h2 id="猜测">猜测<a class="post-anchor" href="#猜测"></a></h2><p>我粗略猜测,因为用的是<code>stream</code>方式传递数据.虽然实际效果我们是一条一条记录的接收,但实际可能不是这样的原理.</p>
+<p>因为在测试的时候10条记录可以,为什么40条记录就不行呢.</p>
+<p>我猜是因为同时回来了多条数据,接收后直接再去连接数据库,进行<code>upodate</code>操作.结果数据库就被无法响应了.</p>
+<h2 id="解决">解决<a class="post-anchor" href="#解决"></a></h2><p>按照上面的猜测,那就把上面的操作分成两个步骤:<code>1. 获取数据 2. 更新数据</code>.</p>
+<p>大体代码如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-comment">/**<br> * 获取所有原始数据<br> */</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getIds</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">var</span> ids = [];<br>  <span class="hljs-keyword">var</span> errList = [];<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{<br>    connection<br>      .query(<br>        <span class="hljs-string">"select id,fans_id,fans_nickname,buyer_id,fans_type,fans_info from yztrade"</span><br>      )<br>      .stream()<br>      .pipe(<br>        stream.Transform({<br>          <span class="hljs-attr">objectMode</span>: <span class="hljs-literal">true</span>,<br>          <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">row, encoding, callback</span>) </span>{<br>            <span class="hljs-keyword">try</span> {<br>              <span class="hljs-comment">// 业务处理</span><br>              setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>                callback();<br>              }, <span class="hljs-number">30</span>);<br>            } <span class="hljs-keyword">catch</span> (err) {<br>              <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`解析<span class="hljs-subst">${row.id}</span>出粗,已经记录,继续查询`</span>);<br>              callback();<br>            }<br>          }<br>        })<br>      )<br>      .on(<span class="hljs-string">"finish"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"所有更新数据已经获取"</span>);<br>        <span class="hljs-keyword">if</span> (errList.length) {<br>          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"未正常处理的id为:"</span>);<br>          <span class="hljs-built_in">console</span>.log(errList);<br>        }<br>        resolve(ids);<br>      });<br>  });<br>}<br><br><span class="hljs-comment">/**<br> * 进行处理<br> */</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">ids,errList</span>) </span>{<br>  <span class="hljs-keyword">var</span> trade = ids.shift();<br>  <span class="hljs-keyword">var</span> errList = errList||[];<br>  <span class="hljs-keyword">var</span> fans = trade.fans;<br>  <span class="hljs-keyword">var</span> query = <span class="hljs-string">`UPDATE yztrade SET fans_id='<span class="hljs-subst">${fans.fans_id}</span>',fans_nickname='<span class="hljs-subst">${fans.fans_nickname}</span>',buyer_id='<span class="hljs-subst">${fans.buyer_id}</span>',fans_type='<span class="hljs-subst">${fans.fans_type}</span>' where id=<span class="hljs-subst">${trade.id}</span>`</span>;<br> <br>  connection.query(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{<br>    <span class="hljs-keyword">if</span> (err) {<br>      <span class="hljs-built_in">console</span>.log(err)<br>      errList.push(trade.id);<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">decodeURIComponent</span>(fans.fans_nickname)}</span> 分析出错`</span>);<br>    } <span class="hljs-keyword">else</span> {<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">decodeURIComponent</span>(fans.fans_nickname)}</span> 分析完成`</span>);<br>    }<br>    <br>    <span class="hljs-keyword">if</span> (ids.length) {<br>      setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>        handler(ids,errList);<br>      }, <span class="hljs-number">50</span>);<br>    } <span class="hljs-keyword">else</span> {<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"全部更新完毕"</span>);<br>      connection.end();<br>      <span class="hljs-keyword">if</span> (errList.length) {<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"没有更新成功的数据,请自己重新检查一下:"</span>);<br>        <span class="hljs-built_in">console</span>.log(errList);<br>      }<br>    }<br>  });<br>}<br><br>getIds()<br>  .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ids</span>) </span>{<br>    handler(ids);<br>  })<br>  .catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"获取原始数据出错"</span>);<br>  });<br></code></pre></td></tr></tbody></table></figure>
+
+
+<p>具体可以看<a href="https://gist.github.com/StoneRen/b362b00613c408407ef5e821549015f1" target="_blank" rel="noopener">gist</a>代码.</p>
+<p>注意以下两个地方.</p>
+<p><code>getIds</code>负责获取和分析数据.作为第一步,先把数据存好,以便后面进行处理.</p>
+<p><code>handler</code> 递归调用,对每条数据进行修改.</p>
+<p>以上两个步骤中有报错的记录,都会记录下来,这样数据修改过程中的错误,全都记录下来,便于人工去处理.</p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/ubuntu%E4%B8%AD%E6%9B%B4%E6%8D%A2%E5%8C%85%E6%BA%90%E4%B8%BA%E9%98%BF%E9%87%8C%E4%BA%91/">ubuntu中本地化配置</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/nodejs%E4%B8%AD%E5%AF%B9mysql%E6%B8%B8%E6%A0%87%E7%9A%84%E6%93%8D%E4%BD%9C/">nodejs中对mysql游标的操作</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/nodejs%E9%80%90%E6%9D%A1%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE-%E4%B8%8B/">https://stoneren.github.io/article/nodejs%E9%80%90%E6%9D%A1%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE-%E4%B8%8B/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      nginx静态服务器405报错 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">nginx静态服务器405报错</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2018/04/18</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/nginx">nginx</a>
+                  
+                
+                  
+                    <a href="/tags/cors">cors</a>
+                  
+                
+                  
+                    <a href="/tags/405">405</a>
+                  
+                
+                  
+                    <a href="/tags/POST">POST</a>
+                  
+                
+                  
+                    <a href="/tags/OPTIOS">OPTIOS</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>搭建一个nginx静态文件服务器,结果报跨域问题,先搞定跨域问题</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:7077' is therefore not allowed access.<br></code></pre></td></tr></tbody></table></figure>
+<p>nginx解决跨域问题,配置还是比较简单的,解决如下: </p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs conf">add_header 'Access-Control-Allow-Origin' '*';<br>add_header 'Access-Control-Allow-Credentials' 'true';<br>add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';<br></code></pre></td></tr></tbody></table></figure>
+
+<p>解决完跨域问题后,出现了<code>405</code>错误,如下</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">OPTIONS http://URL 405 (Not Allowed)<br>Failed to load http://URL: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:7077' is therefore not allowed access. The response had HTTP status code 405.<br></code></pre></td></tr></tbody></table></figure>
+
+<p>这是因为nginx搭建的静态服务器,只能使用<code>GET</code>方法,其他方法都是不被允许的.而我们现在要用<code>POST</code>方法来请求,顺带着又出来一个<code>OPTONS</code>请求.</p>
+<p><code>OPTINS</code>请求又引发了跨域,增加如下配置:</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';<br></code></pre></td></tr></tbody></table></figure>
+
+<p>关于为啥<code>post请求会携带optins请求</code>,可以看这篇文章<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&mid=100000054&idx=1&sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd" target="_blank" rel="noopener">99%的人都理解错了HTTP中GET与POST的区别</a></p>
+<p>我们还要通过把405代理到get方式来处理,以便能拿到我们想要的结果</p>
+<p>完整代码如下: </p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs plain">upstream static_resource { <br>  server localhost:81; <br>}<br>server {<br>  listen       81;<br>  server_name DOMAIN;<br><br>  location / {<br>    add_header 'Access-Control-Allow-Origin' '*';<br>    add_header 'Access-Control-Allow-Credentials' 'true';<br>    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';<br>    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';<br>    root   /Users/ren/work/code/oss/;<br>  }<br>}<br>server {<br>  listen       80;<br>  server_name  DOMAIN;<br>  location / {<br>    add_header 'Access-Control-Allow-Origin' '*';<br>    add_header 'Access-Control-Allow-Credentials' 'true';<br>    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';<br>    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';<br>    root /Users/ren/work/code/oss/;<br>  }<br>  error_page 405 =200 @405; <br>  location @405 { <br>    root /Users/ren/code/oss/;<br>    proxy_method GET; <br>    proxy_pass http://static_resource;  <br>  }<br></code></pre></td></tr></tbody></table></figure>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/vscode-%E6%8F%90%E7%A4%BA-experimentalDecorators-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">vscode 提示'experimentalDecorators'解决方案</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/vscode%E4%B8%8Bvue%E5%A4%9A%E5%B1%9E%E6%80%A7%E6%8D%A2%E8%A1%8C%E8%AE%BE%E7%BD%AE/">vscode下vue多属性换行设置</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/nginx%E9%9D%99%E6%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8405%E6%8A%A5%E9%94%99/">https://stoneren.github.io/article/nginx%E9%9D%99%E6%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8405%E6%8A%A5%E9%94%99/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

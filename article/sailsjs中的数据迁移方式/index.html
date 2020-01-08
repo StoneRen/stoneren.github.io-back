@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      sailsjs中的数据迁移方式 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alter的两个问题"><span class="toc-text">alter的两个问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#启动时间超时"><span class="toc-text">启动时间超时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超时后未被验证的数据会被删除"><span class="toc-text">超时后未被验证的数据会被删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#鱼和熊掌想兼得"><span class="toc-text">鱼和熊掌想兼得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用非关系型数据库"><span class="toc-text">使用非关系型数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改程序部署流程"><span class="toc-text">修改程序部署流程</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">sailsjs中的数据迁移方式</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/07/21</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/sails">sails</a>
+                  
+                
+                  
+                    <a href="/tags/model">model</a>
+                  
+                
+                  
+                    <a href="/tags/alter">alter</a>
+                  
+                
+                  
+                    <a href="/tags/mysqldump">mysqldump</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="目录">目录<a class="post-anchor" href="#目录"></a></h2><p>在<code>sailsjs</code>中,有三种数据迁移方式: <code>safe</code>,<code>alter</code>和<code>drop</code>.在开发环境和测试环境中,直接使用<code>alter</code>会很方便的进行数据的迁移.</p>
+<p>官方对三种方式的说明 <a href="http://sailsjs.com/documentation/concepts/models-and-orm/model-settings#?database-migrations" target="_blank" rel="noopener">具体可查看此链接</a></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>方式</strong></th>
+<th align="left"><strong>解释</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>safe</code></td>
+<td align="left">系统不会主动迁移数据(库),必须手动操作</td>
+</tr>
+<tr>
+<td align="left"><code>alter</code></td>
+<td align="left">自动迁移数据字段,并试图保存现有数据</td>
+</tr>
+<tr>
+<td align="left"><code>drop</code></td>
+<td align="left">每次启动系统时,删除所有数据,并且每次重建model</td>
+</tr>
+</tbody></table>
+<p>在实际工作中碰到两个问题</p>
+<ol>
+<li><code>alter</code>方式中,当数据库中有比较多的数据的时候(其实也不多,比如6000个用户),在网速情况不好的情况,会出现两个问题.</li>
+<li>在正式环境中,无法使用<code>alter</code>,导致在正式环境下,必须手动进行数据库的表结构修改.</li>
+</ol>
+<h2 id="alter的两个问题"><code>alter</code>的两个问题<a class="post-anchor" href="#alter的两个问题"></a></h2><a id="more"></a>
+<p>官方说明如下:</p>
+<blockquote>
+<p><strong>Auto-migrations</strong> - Auto-migrations should <code>never be enabled when connecting to a database with data you care about</code>. Instead, use auto-migrations with fake data, or with cached data that you can easily recreate.<br> But if you are using drop or alter, <code>Sails will load every record in your development database into memory, then drop and recreate the physical layer representation of the data</code> (i.e. tables/collections/sets/etc.)</p>
+</blockquote>
+<p>标注的地方,说明一下.<br>在<code>alter</code>模式下,<code>sails</code>在启动的时候,会把每一条放到内存中,然后删除并且重建数据.这就会导致下面两个问题</p>
+<h3 id="启动时间超时">启动时间超时<a class="post-anchor" href="#启动时间超时"></a></h3><p>我的数据在<code>6000</code>条,网速在<code>1m</code>的情况,启动大约会有4分钟,想想就太恐怖了.当然在我的正式环境中,<code>10000</code>条数据,10秒内就可以搞定了.<br><code>sails</code>的默认超时时间是<code>60*1000ms</code>,也就是1分钟.<br><strong>解决办法:</strong> 延长超时时间.<br>配置如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// config/orm.js</span><br><span class="hljs-built_in">module</span>.exports.orm = {<br>  <span class="hljs-attr">_hookTimeout</span>: <span class="hljs-number">60000</span> <br>};<br><br><span class="hljs-comment">// config/pubsub.js</span><br><span class="hljs-built_in">module</span>.exports.pubsub = {<br>  <span class="hljs-attr">_hookTimeout</span>: <span class="hljs-number">60000</span> <br>};<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>提示</strong>: 网上说只需要配置<code>orm</code>就可以,但是经过实际验证,需要修改以上两个地方</p>
+<h3 id="超时后未被验证的数据会被删除">超时后未被验证的数据会被删除<a class="post-anchor" href="#超时后未被验证的数据会被删除"></a></h3><p>按照上面的说法,<code>在alter模式下,sails在启动的时候,会把每一条放到内存中,然后删除并且重建数据.</code>,也就是说,如果数据超时时间到了,还有些数据没有被重建完,那这些数据就会被丢弃,也就造成了数据库的数据丢失.</p>
+<p>这就是官方说的 <code>never``never``never</code>不要在正式环境中使用<code>alter</code>数据迁移方式</p>
+<h2 id="鱼和熊掌想兼得">鱼和熊掌想兼得<a class="post-anchor" href="#鱼和熊掌想兼得"></a></h2><p>出于实际情况(就是没钱找DBA),我既想使用<code>sails</code>便捷的数据方式,但是也要保证我的正式环境的数据不会被<code>丢弃</code>.😆<br>暂时想到有两种解决办法.</p>
+<h3 id="使用非关系型数据库">使用非关系型数据库<a class="post-anchor" href="#使用非关系型数据库"></a></h3><p>来自于官方的说明,也比较好理解</p>
+<blockquote>
+<p>For example, imagine you add a new attribute to one of your model definitions. If that model is configured to use MongoDB, then this is no big deal; you can keep developing as if nothing happened. But if that model is configured to use MySQL, then there is an extra step: a column must be added to the corresponding table (otherwise model methods like .create() will stop working.) So for a model using MySQL, adding an attribute is a breaking change to the database schema. – <a href="http://sailsjs.com/documentation/concepts/models-and-orm/model-settings#?database-migrations" target="_blank" rel="noopener">http://sailsjs.com/documentation/concepts/models-and-orm/model-settings#?database-migrations</a></p>
+</blockquote>
+<p>以上大体意思是:添加一个字段时,<code>mongodb</code>不会受什么影响,但是<code>mysql</code>的话,就必须在表中添加这个字段,否则类似于<code>create</code>方法就无法正常使用了<br>所以非关系型数据库,貌似是一个好的解决方案,但是官方还是给了一盆冷水:</p>
+<blockquote>
+<p>Even if all of your models use MongoDB, there are still some breaking schema changes to watch out for. For example, if you add unique: true to one of your attributes, a unique index must be created in MongoDB.</p>
+</blockquote>
+<p>意思是说,即使你全部使用<code>mongoDB</code>,新增<code>唯一索引</code>对<code>MongoDB</code>来说也是一个<code>突破性的模式改变</code>,<code>sails</code>还是需要对其进行上面的重建操作.</p>
+<p>所以那些不修改数据库唯一索引的情况下,,<code>mongoDB</code>对你来说是一个很好的选择.如果不是这种情况,那么你依然不能在正式环境中使用<code>alter</code>方式</p>
+<h3 id="修改程序部署流程">修改程序部署流程<a class="post-anchor" href="#修改程序部署流程"></a></h3><p>很临时的方案就是,既然原因出在超时对数据造成丢失.那么就:</p>
+<ol>
+<li>增大超时时间</li>
+<li>在更新前备份数据库</li>
+</ol>
+<p>其实这一个也不算解决方案,只是一种妥协的办法.</p>
+<p>如果有专业的数据库人员,可以给提供一个方案.比如我先在测试环境中更新完数据结构,然后在正式环境我只是更新数据结构,不在由<code>sails</code>进行数据监测.先记录一下,获取可以通过修改<code>sails</code>的钩子,可以实现这个方式.已经更新,请具体看新文章<a href="https://stoneren.github.io/2017/07/24/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">sails中正式环境的数据库迁移</a></p>
+<p><a href="http://sailsjs.com/documentation/concepts/models-and-orm/model-settings" target="_blank" rel="noopener">官方指导</a></p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">sails中正式环境的数据库迁移</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/">使用hexo搭建个人blog</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">https://stoneren.github.io/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

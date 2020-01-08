@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      pm2简单介绍 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pm2使用"><span class="toc-text">pm2使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件的使用"><span class="toc-text">配置文件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#提示"><span class="toc-text">提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只启动某个app"><span class="toc-text">只启动某个app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用pm2-logrotate"><span class="toc-text">使用pm2-logrotate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重启服务"><span class="toc-text">重启服务</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">pm2简单介绍</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/07/26</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/nodejs">nodejs</a>
+                  
+                
+                  
+                    <a href="/tags/pm2">pm2</a>
+                  
+                
+                  
+                    <a href="/tags/jenkins">jenkins</a>
+                  
+                
+                  
+                    <a href="/tags/forever">forever</a>
+                  
+                
+                  
+                    <a href="/tags/热更新">热更新</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>非常简洁的一个使用记录,没有去做深究.先挖个坑.</p>
+<h2 id="介绍">介绍<a class="post-anchor" href="#介绍"></a></h2><p><code>pm2</code>和<code>forever</code>一样,都可以作为nodejs的守护程序,当然不仅仅是<code>nodejs</code>.但相对比来说<code>pm2</code>的配置和图形化以及插件都做的不错.</p>
+<p><code>pm2 list</code>:<br><a href="https://ss.jiasucloud.com/blog/image/pm2-list.png-s" target="_blank" rel="noopener" data-caption="pm2" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/pm2-list.png-s" alt="pm2"></a></p>
+<a id="more"></a>
+<p><code>pm2</code>的控制台,这部分花钱才能使用大部分功能.<br><a href="https://ss.jiasucloud.com/blog/image/pm2-web-ui.gif-s" target="_blank" rel="noopener" data-caption="pm2" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/pm2-web-ui.gif-s" alt="pm2"></a></p>
+<h2 id="安装">安装<a class="post-anchor" href="#安装"></a></h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm install -g pm2<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="pm2使用">pm2使用<a class="post-anchor" href="#pm2使用"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> static<br>pm2 start app.js  --name <span class="hljs-string">"static"</span> -e ~/logs/static_err.log -o logs/static_out.log --<span class="hljs-built_in">log</span>-date-format <span class="hljs-string">"YYYY-MM-DD HH:mm Z"</span><br><br><span class="hljs-built_in">cd</span> api<br>pm2 start app.js  --name <span class="hljs-string">"api"</span> --<span class="hljs-built_in">log</span>-date-format <span class="hljs-string">"YYYY-MM-DD HH:mm Z"</span> -e logs/api_err.log -o ~/logs/api_out.log<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="配置文件的使用">配置文件的使用<a class="post-anchor" href="#配置文件的使用"></a></h2><p>上面那样写,太麻烦,可以使用配置方式 <code>pm2 start pm2.json</code></p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs json">{<br>  <span class="hljs-attr">"apps"</span>:[{<br>    <span class="hljs-attr">"name"</span>:<span class="hljs-string">"test_api"</span>,<br>    <span class="hljs-attr">"cwd"</span>:<span class="hljs-string">"/root/code/test-api"</span>,<br>    <span class="hljs-attr">"args"</span>:<span class="hljs-string">"--port=1550"</span>,<br>    <span class="hljs-attr">"env"</span>:{<br>      <span class="hljs-attr">"NODE_ENV"</span>:<span class="hljs-string">"test"</span><br>    },<br>    <span class="hljs-attr">"script"</span>:<span class="hljs-string">"app.js"</span>,<br>    <span class="hljs-attr">"error_file"</span>: <span class="hljs-string">"/root/code/logs/test_api_err.log"</span>,<br>    <span class="hljs-attr">"out_file"</span>: <span class="hljs-string">"/root/code/logs/test_api_out.log"</span><br>  }]<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+<h3 id="提示">提示<a class="post-anchor" href="#提示"></a></h3><ol>
+<li>没有相互依赖关系的程序要单独自己一个配置,因为reload的时候,会造成所有程序重新加载.<br> 比如,上面的<code>static</code>和<code>api</code>是有关联的,他们应该放在一个配置文件中.<code>op</code>是一个独立的业务,那就应该自己建立一个独立的配置文件.实际中,也是每个独立应用都有自己的配置文件</li>
+<li>pm2 中的配置,只能修改,不能删除,可能使用的extend的方式</li>
+</ol>
+<p>比如: 一开始我设置了<code>DEBUG=remind</code> 然后删除这个配置,再<code>reload</code>,<code>debug</code>依然为<code>remind</code>,所以只好修改为<code>debug=-</code> 这样就不会污染log了<br>3. 注意一下<code>环境变量</code>和<code>参数</code>的使用方式</p>
+<h2 id="只启动某个app">只启动某个app<a class="post-anchor" href="#只启动某个app"></a></h2><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">$ pm2 start   ecosystem.config.js --only api-app<br>$ pm2 restart ecosystem.config.js --only api-app<br>$ pm2 reload  ecosystem.config.js --only api-app<br>$ pm2 delete  ecosystem.config.js --only api-app<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="使用pm2-logrotate">使用<a href="https://github.com/pm2-hive/pm2-logrotate" target="_blank" rel="noopener">pm2-logrotate</a><a class="post-anchor" href="#使用pm2-logrotate"></a></h2><p>当正式上线后,日志文件会变得慢慢庞大.通过<a href="https://github.com/pm2-hive/pm2-logrotate" target="_blank" rel="noopener">pm2-logrotate</a>,可以对日志文件进行归档.</p>
+<h3 id="安装-1">安装<a class="post-anchor" href="#安装-1"></a></h3><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">pm2 install pm2-logrotate<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="配置">配置<a class="post-anchor" href="#配置"></a></h3><p>可以进行自定义配置,参数请查看<a href="https://github.com/pm2-hive/pm2-logrotate#configure" target="_blank" rel="noopener">github</a></p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">pm2 <span class="hljs-built_in">set</span> pm2-logrotate:dateFormat YYYY-MM-DD_HH-mm-ss<br>pm2 <span class="hljs-built_in">set</span> pm2-logrotate:max_size 1M<br>pm2 <span class="hljs-built_in">set</span> pm2-logrotate:workerInterval 1800<br></code></pre></td></tr></tbody></table></figure>
+<p>结果如下:</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh">[PM2] Module pm2-logrotate restarted<br>== pm2-logrotate ==<br>┌────────────────┬─────────────────────┐<br>│ key            │ value               │<br>├────────────────┼─────────────────────┤<br>│ dateFormat     │ YYYY-MM-DD_HH-mm-ss │<br>│ max_size       │ 1M                  │<br>│ workerInterval │ 1800                │<br>└────────────────┴─────────────────────┘<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="重启服务">重启服务<a class="post-anchor" href="#重启服务"></a></h2><p>重启服务命令为<code>pm2 restart XXX</code>.但是这样会终端nodejs程序,导致服务终端,在程序重新启动之前就无法处理请求了.</p>
+<p>幸好,<code>pm2</code>提供了信号传递.<code>pm2 sendSignal SIGUSR2 XXX</code>,程序对信号进行处理.比如程序先fork一个子进程提供服务,然后在将子进程重启,从而达到了热更新.当然这需要程序进行一下简单的处理. 具体查看<a href="http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#signals" target="_blank" rel="noopener">官方文档</a></p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">[翻译] promise的简单实现</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/%E6%9B%B4%E6%8D%A2yarn%E6%BA%90%E4%B8%BA%E6%B7%98%E5%AE%9D%E9%95%9C%E5%83%8F/">更换yarn源为淘宝镜像</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/pm2%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">https://stoneren.github.io/article/pm2%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

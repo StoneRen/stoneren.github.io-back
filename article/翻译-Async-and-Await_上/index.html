@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      [翻译] Async and Await (上) - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回调问题"><span class="toc-text">回调问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#错误处理重复"><span class="toc-text">错误处理重复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理未指定"><span class="toc-text">错误处理未指定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计划未指定"><span class="toc-text">计划未指定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise如何工作"><span class="toc-text">Promise如何工作</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">[翻译] Async and Await (上)</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/08/10</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/nodejs">nodejs</a>
+                  
+                
+                  
+                    <a href="/tags/async">async</a>
+                  
+                
+                  
+                    <a href="/tags/javascript">javascript</a>
+                  
+                
+                  
+                    <a href="/tags/await">await</a>
+                  
+                
+                  
+                    <a href="/tags/callback hell">callback hell</a>
+                  
+                
+                  
+                    <a href="/tags/翻译">翻译</a>
+                  
+                
+                  
+                    <a href="/tags/promise">promise</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><blockquote>
+<p>原文地址:<a href="https://zeit.co/blog/async-and-await" target="_blank" rel="noopener">async and await</a></p>
+</blockquote>
+<p><code>javascript</code>,尤其是<code>node.js</code>经常与<a href="https://twitter.com/dr4goonis/status/476617165463105536" target="_blank" rel="noopener">回调地狱</a>相关联.你如果写过处理很多异步IO的代码,下面的形式你一定会非常熟悉:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLikes</span> (<span class="hljs-params"></span>) </span>{<br>  getUsers(<span class="hljs-function">(<span class="hljs-params">err, users</span>) =></span> {<br>    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> fn(err);<br>    filterUsersWithFriends(<span class="hljs-function">(<span class="hljs-params">err, usersWithFriends</span>) =></span> {<br>      <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> fn(err);<br>      getUsersLikes(usersWithFriends, (err, likes) => {<br>        <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">return</span> fn (err);<br>        fn(<span class="hljs-literal">null</span>, likes);<br>      });<br>    });<br>  });<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>事实证明,这段代码可以被更容易和更安全的书写.<br>我会向你展示<code>Promise</code>和<code>async</code> <code>await</code>如何绑定,这也是我们在生产给环境中使用这些新功能所学到的经验教训.<br>让我们从上面的陷阱开始前进吧.</p>
+<blockquote>
+<p>无法翻墙的,可以直接看下面的twitter图片<br>(其实看图片 不光是回调判断出现问题,而且明显层进式判断太多了,业务全都揉在一块了-StoneRen注):<br><a href="https://ss.jiasucloud.com/blog/image/Bp1IyS7CYAATIEB.jpg-p" target="_blank" rel="noopener" data-caption="回调地狱" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/Bp1IyS7CYAATIEB.jpg-p" alt="回调地狱"></a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="回调问题">回调问题<a class="post-anchor" href="#回调问题"></a></h2><h3 id="错误处理重复">错误处理重复<a class="post-anchor" href="#错误处理重复"></a></h3><p>大多数情况下,你仅仅是想传递错误.   </p>
+<p>但是在上面的例子中,你重复了很多次. 当错误实际发生时,很容易丢失<code>return</code>,并且仅仅是观察到(没有明显的调试)</p>
+<blockquote>
+<p>StoneRen注:<br>作者指的是这个地方,重复很多次,自己本身不处理错误,仅仅是传递给专门的业务去挫力<br> if (err) return fn (err);</p>
+</blockquote>
+<h2 id="错误处理未指定">错误处理未指定<a class="post-anchor" href="#错误处理未指定"></a></h2><p>当错误发生时很多流行库都会执行一个带着错误参数的回调,而在成功的时候回调用<code>null</code>来代替<br>不幸的是,情况并非总是如此.你可能会受到<code>false</code>而非<code>null</code>.还有一些库甚至会完全省略.如果同时发生几个错误,你会收到多个回调.天啊…</p>
+<h2 id="计划未指定">计划未指定<a class="post-anchor" href="#计划未指定"></a></h2><p><code>callback</code>总是会及时返回吗?或者在不同的<a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/" target="_blank" rel="noopener">microtask</a>?或者在不同的<code>tick</code>?有时还会一直回调?<br>没人知道答案!读你自己的代码一定不会告诉你(<code>StoneRen注:我感觉这个地方是作者写错了,自己的代码肯定会知道回调情况的.原文:Reading your own code certainly won't tell you</code>).如果足够幸运,读源码库的文档会告诉你.<br>也有可能<code>callback</code>会意料之外的多次调用.再次,这几乎肯定会导致代码非常难以进行调试<br>在特定情况下,代码会继续运行,但是却不能很好的动作.其他时候,你也会收到一个不是十分明显的堆栈跟踪.<br>这些问题的解决方案就是<code>Promise</code>的标准. </p>
+<h2 id="Promise如何工作">Promise如何工作<a class="post-anchor" href="#Promise如何工作"></a></h2><p><code>Promise</code>给你提供了一个明细的规定和API.尽管我们可能会不同意<code>Promise</code>的规定和API是最好的方式,但是他们却是被严格定义好的了.</p>
+<p>所以当你用<code>Promise</code>写代码时,上面提到的规范缺失并不需要我们关心.</p>
+<p>This is what the equivalent to setTimeout would look like using Promise:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span> (<span class="hljs-params">time</span>) </span>{<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =></span> setTimeout(resolve, time));<br>}<br><br>sleep(<span class="hljs-number">100</span>)<br>.then(<span class="hljs-function"><span class="hljs-params">()</span> =></span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'100ms elapsed'</span>))<br>.catch(<span class="hljs-function"><span class="hljs-params">()</span> =></span> <span class="hljs-built_in">console</span>.error(<span class="hljs-string">'error!'</span>));<br></code></pre></td></tr></tbody></table></figure>
+
+<p><code>Promise</code>有两个设定的状态:<code>resolved</code>和<code>rejected</code>.如上所见,你可以配置一对回调包含<code>resolved</code>值和<code>rejected</code>的值</p>
+<p>我们传递回调给<code>promise</code>的事实表明,我们经常处理一些针对成功或者失败的回调( <code>原文:The fact that we pass callbacks to a promise shows that we often deal with somewhat of a false dichotomy.</code>).很明显,<code>Promise</code>需要回调去做意义明确的事情.<code>promise</code>和<code>callback</code>模式的比较在JavaScript社区已经达成明显共识.</p>
+<p><code>Promise</code>返回了一个单一值.不像上面的<code>callback</code>模式,你不会获取执行成功之后的错误.或者稍后收到一个值和一个错误.</p>
+<p>你可以把<code>promise</code>的<code>resolve</code>比作<code>return</code>,<code>reject</code>比作<code>throw</code>.正如稍后所见,这种语义上的同等性可以通过关键字<code>async</code>和<code>await</code>关键字来实现.</p>
+<p>就规划目标而言,<code>Promise</code>规范已经保证总是在<code>未来时间</code>进行调用(比如,下一次<code>microtask</code>).这就是说,无论是否已经执行完成,你每次调用<code>then</code>或者<code>catch</code>时,<code>promise</code>都会异步执行.</p>
+<p>我们重写开头的例子,类似于如下形式:   </p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLikes</span> (<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">return</span> getUsers()<br>  .then(<span class="hljs-function"><span class="hljs-params">users</span> =></span> filterUsersWithFriends)<br>  .then(<span class="hljs-function"><span class="hljs-params">usersWithFriends</span> =></span> getUsersLikes);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>这样看起来舒服多了.但如果我们的逻辑变了,重构代码会变得非常快速复杂.<br>还是上面的代码,一个典型的错误<code>filterUsersWithFriends</code>需要做不同的处理.</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLikes</span> (<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =></span> {<br>    getUsers().then(<span class="hljs-function"><span class="hljs-params">users</span> =></span> {<br>      filterUsersWithFriends(users)<br>      .then(resolve)<br>      .catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =></span> {<br>        resolve(trySomethingElse(users));<br>      });<br>    }, reject)<br>  });<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>没有任何<code>捷径</code>能拯救我们,下面我们看一下解决方案.</p>
+<p>—未完待续—</p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/ejs%E4%B8%8Evue%E4%B8%AD%E6%A8%A1%E6%9D%BF%E4%B8%AD%E5%88%86%E9%9A%94%E7%AC%A6%E7%9A%84%E5%86%B2%E7%AA%81/">hexo与vue关于模板处理的冲突</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/js%E4%B8%AD%E5%88%A9%E7%94%A8%E7%9F%A9%E9%98%B5%E6%80%9D%E6%83%B3%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81/">js中利用矩阵思想来进行压缩编码</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">https://stoneren.github.io/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      使用hexo搭建个人blog - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装和配置hexo"><span class="toc-text">安装和配置hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择和配置模板"><span class="toc-text">选择和配置模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置github"><span class="toc-text">配置github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署"><span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">使用hexo搭建个人blog</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/06/19</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/hexo">hexo</a>
+                  
+                
+                  
+                    <a href="/tags/npm">npm</a>
+                  
+                
+                  
+                    <a href="/tags/nvm">nvm</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="目录">目录<a class="post-anchor" href="#目录"></a></h2><p>[toc]</p>
+<h2 id="安装和配置hexo">安装和配置<code>hexo</code><a class="post-anchor" href="#安装和配置hexo"></a></h2><ol>
+<li><code>npm install hexo-cli -g</code></li>
+<li><code>hexo init stoneren.github.io</code></li>
+<li>安装依赖</li>
+</ol>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> stoneren.github.io<br>npm install<br>hexo s[ever]<br></code></pre></td></tr></tbody></table></figure>
+
+<a id="more"></a>
+
+<h2 id="选择和配置模板">选择和配置模板<a class="post-anchor" href="#选择和配置模板"></a></h2><p>自带的模板有点难看,看一个国人写的模板,确实比较舒服 <code>yilia</code>,</p>
+<ol>
+<li><p>安装模板   </p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">git <span class="hljs-built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia --depth=1<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>进行配置,具体可以参见<a href="https://github.com/litten/hexo-theme-yilia#四配置" target="_blank" rel="noopener">官方指导</a></p>
+</li>
+<li><p>安装<code>yilia</code>模板所需的依赖</p>
+</li>
+</ol>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm i hexo-generator-json-content --save<br></code></pre></td></tr></tbody></table></figure>
+
+<ol start="4">
+<li>修改根目录的配置</li>
+</ol>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">jsonContent:</span><br><span class="hljs-attr">meta:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">pages:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">posts:</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">date:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">path:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">text:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">raw:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">content:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">slug:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">updated:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">comments:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">link:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">permalink:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">excerpt:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">categories:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">tags:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="配置github">配置github<a class="post-anchor" href="#配置github"></a></h2><p>具体怎么在github中创建blog,不在赘述.</p>
+<ol>
+<li>安装依赖 <code>npm install hexo-deployer-git --save</code></li>
+<li>修改<a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">配置</a>:</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">deploy:<br>  type: git<br>  repo: <repository url><br>  branch: [branch]<br>  message: [message]<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="部署">部署<a class="post-anchor" href="#部署"></a></h2><p>具体查看<a href="https://hexo.io/docs/commands.html" target="_blank" rel="noopener">官方指导</a></p>
+<ul>
+<li><strong>hexo s[erver]</strong> 本地预览</li>
+<li><strong>hexo g[erate]</strong> 生成静态文件</li>
+<li><strong>hexo d[eploy]</strong> 发布到指定的服务器</li>
+<li><strong>hexo generate –deploy</strong> 生成静态文件然后部署到服务器</li>
+</ul>
+<h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><ol>
+<li><p>如果碰到<code>Error: Module version mismatch. Expected 48, got 51</code>这样的问题    </p>
+<p>原因:找不到之前的npm依赖,原因是我一开始用的<code>iterm2</code>自带的nodejs安装的<code>hexo</code>,后来切换到之前我一直使用的<code>nvm</code>,导致在我的<code>nvm</code>环境中,找不到相关模块.   </p>
+<p>解决办法: 重新安装<code>hexo</code>.中间还碰到一个问题,见问题2</p>
+</li>
+<li><p>在卸载<code>hexo</code>的时候,<code>npm uninstall hexo-cli -g</code>和<code>npm uninstall -g hexo</code>后,竟然还能执行命令<code>hexo</code>.   </p>
+<p>原因:  之前安装过<code>hexo</code>,因为查看位置在<code>/usr/local/bin/hexo</code> 这个肯定就不是自己用node安装的</p>
+<p>解决办法: <code>rm /usr/local/bin/hexo</code></p>
+</li>
+</ol>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a>
+        
+    </div>
+    <div class="item right">
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/">https://stoneren.github.io/article/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAblog/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

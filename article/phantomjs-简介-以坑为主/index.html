@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      phantomjs 简介 - 以坑为主 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回调"><span class="toc-text">回调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-text">调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#官网的一堆无用的指导"><span class="toc-text">官网的一堆无用的指导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程调试"><span class="toc-text">远程调试</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">phantomjs 简介 - 以坑为主</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/09/30</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/phantomjs">phantomjs</a>
+                  
+                
+                  
+                    <a href="/tags/坑">坑</a>
+                  
+                
+                  
+                    <a href="/tags/debug">debug</a>
+                  
+                
+                  
+                    <a href="/tags/remote-debug">remote-debug</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p><a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>,<code>Full web stack,No browser required</code>.</p>
+<p><a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>基于<code>webkit</code>内核,来编译解释执行javascript代码.比如执行批量脚本的时候,不需要浏览器,只需要借助<a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>就可以执行网页中的js代码了.本文基于官网现在的<code>2.1</code>版本.</p>
+<p>因为官网的文档算是烂到家了,所以本文中的很多问题,估计你都会碰到,并且可能会像我一样抓狂.<a href="https://ss.jiasucloud.com/blog/image/9150e4e5ly1fg4oyrvkjbg201e01e3yw.gif-s" target="_blank" rel="noopener" data-caption="抓狂" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/9150e4e5ly1fg4oyrvkjbg201e01e3yw.gif-s" alt="抓狂"></a></p>
+<p>最开始文章标题是<code>phantomjs简介</code>,但是在是被肯坏了.下面调试那个坑,你肯定会碰到.</p>
+<p>当然,抓狂过后,解决完问题后的那种心情也是只有自己能体会.</p>
+<p><a href="https://ss.jiasucloud.com/blog/image/1fd6e8617007011a041b009067051636.gif-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/1fd6e8617007011a041b009067051636.gif-s" alt></a></p>
+<p>本文包含以下内容: <code>安装</code> <code>示例</code> <code>回调</code>和重点介绍的<code>调试</code>部分.</p>
+<a id="more"></a>
+<h2 id="安装">安装<a class="post-anchor" href="#安装"></a></h2><p>安装比较简单,下载编译后的文件和自己从源码编译.重点介绍一下下载安装,因为这是我的执行过程,想编译安装的,请访问<a href="http://phantomjs.org/build.html" target="_blank" rel="noopener">官网</a></p>
+<h3 id="下载">下载<a class="post-anchor" href="#下载"></a></h3><p>到<a href="http://phantomjs.org/download.html" target="_blank" rel="noopener">官网</a>按照你的系统选择合适的文件进行下载.<br><a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip" target="_blank" rel="noopener">phantomjs on MacOS</a>,大约<code>16.84MB</code></p>
+<blockquote>
+<p>已经静态编译完成,不需要额外安装<code>QT</code>或任何其他库.</p>
+</blockquote>
+<p>以下是其他平台的文件下载地址:<br><a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" target="_blank" rel="noopener">phantomjs on Linux 64-bit</a><br><a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-i686.tar.bz2" target="_blank" rel="noopener">phantomjs on Linux 64-bit</a><br><a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-windows.zip" target="_blank" rel="noopener">phantomjs on windows</a></p>
+<h3 id="配置">配置<a class="post-anchor" href="#配置"></a></h3><p>下载后解压,比如我的存放目录为<code>~/soft/phantomjs</code>.<br>因为我在mac平台,并且平时主要使用<code>item2</code>和<code>terminal</code>,所以修改<code>.bash_profile</code>或者<code>.zshrc</code></p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">alias</span> phantomjs=<span class="hljs-string">'/Users/Ren/soft/phantomjs/bin/phantomjs'</span><br></code></pre></td></tr></tbody></table></figure>
+<p>当然你也可以按照官方指示,把<code>bin</code>目录,放在系统的<code>PATH</code>中.</p>
+<p>测试<code>phantomjs -v</code>,结果如下:</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">➜  ~ phantomjs -v<br>2.1.1<br></code></pre></td></tr></tbody></table></figure>
+<p>ok,安装成功.</p>
+<h2 id="示例">示例<a class="post-anchor" href="#示例"></a></h2><p>按照下面的代码,我们生成一张百度首页的截图.</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// baidu.js</span><br><span class="hljs-keyword">var</span> page = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpage'</span>).create();<br>page.open(<span class="hljs-string">'http://baidu.com'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">status</span>) </span>{<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Status: "</span> + status);<br>  <span class="hljs-keyword">if</span>(status === <span class="hljs-string">"success"</span>) {<br>    page.render(<span class="hljs-string">'baidu.png'</span>);<br>  }<br>  phantom.exit();<br>});<br></code></pre></td></tr></tbody></table></figure>
+
+<p>执行命令 <code>phantomjs baidu.js</code>,然后在当前目录下,就可以看到<code>baidu.png</code>图片了.<br>自己试试吧,虽然官网的文档很垃圾,但是大多数文档你可以靠猜.</p>
+<h2 id="回调">回调<a class="post-anchor" href="#回调"></a></h2><p>回调会经常用到,所以在此特意说明一下.</p>
+<p>如下代码:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> webPage = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpage'</span>);<br><span class="hljs-keyword">var</span> page = webPage.create();<br><span class="hljs-keyword">var</span> url = <span class="hljs-string">'http://www.baidu.com'</span>;<br>page.onCallback = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'CALLBACK: '</span> + <span class="hljs-built_in">JSON</span>.stringify(data));<br>};<br>page.open(url, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">status</span>) </span>{<br>  page.evaluate(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">23</span>)<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span>.callPhantom === <span class="hljs-string">'function'</span>) {<br>      <span class="hljs-built_in">window</span>.callPhantom({<br>        <span class="hljs-attr">hello</span>: <span class="hljs-string">'world'</span><br>      });<br>    }<br>  })<br>})<br></code></pre></td></tr></tbody></table></figure>
+
+<p>看代码<code>第9行-第14行</code>,执行一下,结果是<code>CALLBACK: {"hello":"world"}</code>,高兴的是回调成功了,但是<code>第9行</code>的命令为啥没有显示出来呢?</p>
+<p>因为<code>page.evaluate</code>函数是在页面内执行,所以会在页面的控制台打印出<code>23</code>.如果我们想调试怎么办呢,也简单,重写<code>console</code>函数就可以了.</p>
+<p>官方例子如下 <a href="http://phantomjs.org/api/webpage/handler/on-console-message.html" target="_blank" rel="noopener">onConsoleMessage</a>:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">page.onConsoleMessage = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg, lineNum, sourceId</span>) </span>{<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'CONSOLE: '</span> + msg + <span class="hljs-string">' (from line #'</span> + lineNum + <span class="hljs-string">' in "'</span> + sourceId + <span class="hljs-string">'")'</span>);<br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>结果如下:<br><a href="https://ss.jiasucloud.com/blog/image/phantomjs_console_message.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/phantomjs_console_message.png-s" alt></a></p>
+<h2 id="调试">调试<a class="post-anchor" href="#调试"></a></h2><h3 id="官网的一堆无用的指导">官网的一堆无用的指导<a class="post-anchor" href="#官网的一堆无用的指导"></a></h3><p>官网的文档之烂,确实让我刮目相看.比如<code>page.close</code>这个文档,简直是绝无仅有,自己<a href="http://phantomjs.org/api/webpage/method/close.html" target="_blank" rel="noopener">去欣赏一下吧</a></p>
+<a href="https://ss.jiasucloud.com/blog/image/phantomjs_page_close.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/phantomjs_page_close.png-s" alt></a>
+
+<p><a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>最痛苦的地方,就是出错了,你不知道哪里出错了.他不给你提示.</p>
+<p>如下代码:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// exception.js</span><br><span class="hljs-keyword">var</span> foo = <span class="hljs-string">'bar'</span>;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">`foo <span class="hljs-subst">${bar}</span>`</span>);<br>phantom.exit();<br></code></pre></td></tr></tbody></table></figure>
+<p>你执行以下上面的代码,会发现半天没反应,直到你思考完人生后,才恍然大悟,这个代码出错了.</p>
+<a href="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8nk1z403aj20cr0b4jrh.jpg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8nk1z403aj20cr0b4jrh.jpg-s" alt></a>
+
+<p>官网倒是有处理错误的解决办法,如下代码:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><br><span class="hljs-keyword">var</span> webPage = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpage'</span>);<br><span class="hljs-keyword">var</span> page = webPage.create();<br><br>page.onError = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg, trace</span>) </span>{<br><br>  <span class="hljs-keyword">var</span> msgStack = [<span class="hljs-string">'ERROR: '</span> + msg];<br><br>  <span class="hljs-keyword">if</span> (trace && trace.length) {<br>    msgStack.push(<span class="hljs-string">'TRACE:'</span>);<br>    trace.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{<br>      msgStack.push(<span class="hljs-string">' -> '</span> + t.file + <span class="hljs-string">': '</span> + t.line + (t<span class="hljs-function">.<span class="hljs-keyword">function</span> ? ' (<span class="hljs-params">in function <span class="hljs-string">"' + t.function +'"</span></span>)' : ''));<br>    });<br>  }<br><br>  <span class="hljs-title">console</span>.<span class="hljs-title">error</span>(<span class="hljs-params">msgStack.join(<span class="hljs-string">'\n'</span></span>));<br><br>};</span><br></code></pre></td></tr></tbody></table></figure>
+<p>这个代码能监听到页面的错误信息,但现在我们的错误不是页面中的错误,而是代码文件本身有问题.那用如下代码,<a href="http://phantomjs.org/api/phantom/handler/on-error.html" target="_blank" rel="noopener">官网onError</a></p>
+<blockquote>
+<p>This callback is invoked when there is a JavaScript execution error not caught by a page.onError handler. This is the closest it gets to having a global error handler in PhantomJS, and so it is a best practice to set this onError handler up in order to catch any unexpected problems. The arguments passed to the callback are the error message and the stack trace [as an Array].</p>
+</blockquote>
+<p>所以简单的看一下下面的最简单的代码:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// exception.js</span><br>phantom.onError = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg, trace</span>) </span>{<br>  <span class="hljs-keyword">var</span> msgStack = [<span class="hljs-string">'PHANTOM ERROR: '</span> + msg];<br>  <span class="hljs-keyword">if</span> (trace && trace.length) {<br>    msgStack.push(<span class="hljs-string">'TRACE:'</span>);<br>    trace.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">t</span>) </span>{<br>      msgStack.push(<span class="hljs-string">' -> '</span> + (t.file || t.sourceURL) + <span class="hljs-string">': '</span> + t.line + (t<span class="hljs-function">.<span class="hljs-keyword">function</span> ? ' (<span class="hljs-params">in function <span class="hljs-string">' + t.function +'</span></span>)' : ''));<br>    });<br>  }<br>  <span class="hljs-title">console</span>.<span class="hljs-title">error</span>(<span class="hljs-params">msgStack.join(<span class="hljs-string">'\n'</span></span>));<br>  <span class="hljs-title">phantom</span>.<span class="hljs-title">exit</span>(<span class="hljs-params"><span class="hljs-number">1</span></span>);<br>};<br><br><span class="hljs-title">var</span> <span class="hljs-title">foo</span> = '<span class="hljs-title">bar</span>';<br>// <span class="hljs-title">exception</span> 1<br><span class="hljs-title">console</span>.<span class="hljs-title">log</span>(<span class="hljs-params"><span class="hljs-string">'foo'</span> + foot</span>);<br>// <span class="hljs-title">exception</span> 2<br><span class="hljs-title">console</span>.<span class="hljs-title">log</span>(<span class="hljs-params"><span class="hljs-string">`foo <span class="hljs-subst">${bar}</span>`</span></span>);<br><br><span class="hljs-title">phantom</span>.<span class="hljs-title">exit</span>(<span class="hljs-params"></span>);</span><br></code></pre></td></tr></tbody></table></figure>
+<p>这段代码也没有任何报错,让你能郁闷死.</p>
+<h3 id="远程调试">远程调试<a class="post-anchor" href="#远程调试"></a></h3><p>上面的官方指导,按说应该可以使用,但是我就是没有报错信息,这个太郁闷了.正好他还有远程调试,我们来试试吧.</p>
+<p><code>phantomjs --remote-debugger-port=9000  --debug=yes exception.js</code></p>
+<p>用浏览器打开 <code>http://127.0.0.1:9000</code>,看到错误信息,终于露出了微笑的面容了.<br><a href="https://ss.jiasucloud.com/blog/image/smile2.jpg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/smile2.jpg-s" alt></a><br><a href="https://ss.jiasucloud.com/blog/image/phantomjs_debug_exception.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/phantomjs_debug_exception.png-s" alt></a></p>
+<p>但是调整代码正常后,你又会发现一个很诡异的问题.程序不执行,没问题,人家说了,你在控制台输入<code>__run()</code>进行代码执行.</p>
+<p>转了一大圈,幸运的人啊,你发现还是执行不了(老版本的chrome浏览器没问题的,我的是chrome v61).天啊,人生啊.</p>
+<p><a href="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8pomipgp4j20hs0fg76u.jpg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/6af89bc8gw1f8pomipgp4j20hs0fg76u.jpg-s" alt></a></p>
+<p>你会发现你输入了 <code>__run()</code>,在按回车进行执行的时候,你发现回车之后竟然是<code>换到下一行</code>.😤,到底如何执行这个命令啊.不执行命令如何调试啊.</p>
+<p>好在有万能的google,否则真的崩溃了.看<a href="https://stackoverflow.com/questions/17573249/getting-remote-debugging-set-up-with-phantomjs" target="_blank" rel="noopener">高人的解释吧</a></p>
+<p>有2种方案解决这个<code>回车</code>问题,</p>
+<ol>
+<li>在开始调试的时候自动运行 <code>--remote-debugger-autorun=yes</code></li>
+<li>在控制台执行代码</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// UPDATE for Chrome: (from Thiago Fernandes below): Apparently the issue is caused by the Chrome not accepting the enter key, so the workaround is to evaluate this function inside chrome console, to get the enterKey working:</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isEnterKey</span>(<span class="hljs-params">event</span>) </span>{<br>  <span class="hljs-keyword">return</span> (event.keyCode !== <span class="hljs-number">229</span> && event.keyIdentifier === <span class="hljs-string">"Enter"</span>) || event.keyCode === <span class="hljs-number">13</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>当看到这个结果的时候,真的快要哭了<br><a href="https://ss.jiasucloud.com/blog/image/phantomjs_cry.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/phantomjs_cry.png-s" alt></a></p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/%E4%BD%BF%E7%94%A8https%E8%AE%BF%E9%97%AE%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/">使用https访问个人网站</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E4%B9%A0%E9%A2%982-%E6%A8%A1%E4%BB%BFinstagram%E6%BB%A4%E9%95%9C/">深度学习自习题2-模仿instagram滤镜</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/phantomjs-%E7%AE%80%E4%BB%8B-%E4%BB%A5%E5%9D%91%E4%B8%BA%E4%B8%BB/">https://stoneren.github.io/article/phantomjs-%E7%AE%80%E4%BB%8B-%E4%BB%A5%E5%9D%91%E4%B8%BA%E4%B8%BB/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

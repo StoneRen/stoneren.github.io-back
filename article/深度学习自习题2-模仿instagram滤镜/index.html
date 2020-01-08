@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      深度学习自习题2-模仿instagram滤镜 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#视频演示"><span class="toc-text">视频演示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最终效果"><span class="toc-text">最终效果</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#instagram-Clarendon-滤镜效果"><span class="toc-text">instagram Clarendon 滤镜效果:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instagram-泛黄滤镜"><span class="toc-text">instagram 泛黄滤镜:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instagram-Amaro-滤镜"><span class="toc-text">instagram Amaro 滤镜</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码部分"><span class="toc-text">代码部分</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">深度学习自习题2-模仿instagram滤镜</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/09/23</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/ai">ai</a>
+                  
+                
+                  
+                    <a href="/tags/deep learn">deep learn</a>
+                  
+                
+                  
+                    <a href="/tags/synaptic">synaptic</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>依然还是用的<a href="https://github.com/cazala/synaptic" target="_blank" rel="noopener">synaptic</a>.根据官方的例子稍微修改了一下.文章主要分2部分<code>演示部分</code>和<code>核心代码</code>.</p>
+<h2 id="视频演示">视频演示<a class="post-anchor" href="#视频演示"></a></h2><p>点击下面视频的播放按钮,查看效果演示吧</p>
+<p><video controls="controls" src="http://s2.jiasucloud.com/blog/video/ai/ai_2_1.mp4"></video></p>
+<h2 id="最终效果">最终效果<a class="post-anchor" href="#最终效果"></a></h2><p>以下全是训练200次后的效果,当然图片质量上会有部分压缩.</p>
+<a id="more"></a>
+
+<h3 id="instagram-Clarendon-滤镜效果"><strong>instagram Clarendon 滤镜效果:</strong><a class="post-anchor" href="#instagram-Clarendon-滤镜效果"></a></h3><p><strong>原图:</strong><br><a href="https://ss.jiasucloud.com/blog/image/oldpic.jpeg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/oldpic.jpeg-s" alt></a> <a href="https://ss.jiasucloud.com/blog/image/newpic_1.jpeg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/newpic_1.jpeg-s" alt></a></p>
+<p><strong>测试图片1:</strong><br><a href="https://ss.jiasucloud.com/blog/image/original_1.jpg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/original_1.jpg-s" alt></a> <a href="https://ss.jiasucloud.com/blog/image/1-1.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/1-1.png-s" alt></a></p>
+<p><strong>测试图片2:</strong><br><a href="https://ss.jiasucloud.com/blog/image/original_2.jpg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/original_2.jpg-s" alt></a> <a href="https://ss.jiasucloud.com/blog/image/2-1.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/2-1.png-s" alt></a></p>
+<h3 id="instagram-泛黄滤镜"><strong>instagram 泛黄滤镜:</strong><a class="post-anchor" href="#instagram-泛黄滤镜"></a></h3><p><a href="https://ss.jiasucloud.com/blog/image/newpic_2.jpeg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/newpic_2.jpeg-s" alt></a></p>
+<p>训练结果:<br><a href="https://ss.jiasucloud.com/blog/image/2-2.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/2-2.png-s" alt></a></p>
+<h3 id="instagram-Amaro-滤镜"><strong>instagram Amaro 滤镜</strong><a class="post-anchor" href="#instagram-Amaro-滤镜"></a></h3><p><a href="https://ss.jiasucloud.com/blog/image/newpic_3.jpeg-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/newpic_3.jpeg-s" alt></a><br>训练结果:<br><a href="https://ss.jiasucloud.com/blog/image/1-3.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/1-3.png-s" alt></a> <a href="https://ss.jiasucloud.com/blog/image/2-3.png-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/2-3.png-s" alt></a></p>
+<h2 id="代码部分">代码部分<a class="post-anchor" href="#代码部分"></a></h2><p>本来想把代码放在<code>jsfiddler</code>上,但是<code>jsfiddler</code>不能上传图片,而<code>canvas</code>只能读取本域的图片数据,所以没办法发出全部代码来.</p>
+<p>但其实核心代码也比较简单.</p>
+<p>核心训练代码如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> px;<br><span class="hljs-keyword">for</span> (index = <span class="hljs-number">0</span>; index < size.value; index += <span class="hljs-number">2</span>) {<br>    px = pixel(oldPic, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">-1</span>, <span class="hljs-number">0</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">-1</span>, <span class="hljs-number">1</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>));<br>    px = px.concat(pixel(oldPic, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>));<br>    perceptron.activate(px);<br>    perceptron.propagate(<span class="hljs-number">.12</span>, pixel(newPic, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>));<br>}<br></code></pre></td></tr></tbody></table></figure>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/phantomjs-%E7%AE%80%E4%BB%8B-%E4%BB%A5%E5%9D%91%E4%B8%BA%E4%B8%BB/">phantomjs 简介 - 以坑为主</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/photo%E9%A2%91%E9%81%93%E6%96%B0%E4%B8%8A%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD/">photo频道新上分页功能</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E4%B9%A0%E9%A2%982-%E6%A8%A1%E4%BB%BFinstagram%E6%BB%A4%E9%95%9C/">https://stoneren.github.io/article/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%87%AA%E4%B9%A0%E9%A2%982-%E6%A8%A1%E4%BB%BFinstagram%E6%BB%A4%E9%95%9C/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

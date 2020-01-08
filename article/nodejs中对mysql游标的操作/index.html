@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      nodejs中对mysql游标的操作 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#游标"><span class="toc-text">游标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-text">解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#小步读取"><span class="toc-text">小步读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stream"><span class="toc-text">stream</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">nodejs中对mysql游标的操作</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/08/18</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/mysql">mysql</a>
+                  
+                
+                  
+                    <a href="/tags/nodejs">nodejs</a>
+                  
+                
+                  
+                    <a href="/tags/mysqljs">mysqljs</a>
+                  
+                
+                  
+                    <a href="/tags/cursor">cursor</a>
+                  
+                
+                  
+                    <a href="/tags/stream">stream</a>
+                  
+                
+                  
+                    <a href="/tags/database">database</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>[题外]你还记得当年的<a href="https://baike.baidu.com/item/游标卡尺/2768806?from=jsfun.info" target="_blank" rel="noopener">游标卡尺</a>吗?当时我对这玩意的设计者真是极其的佩服<br><a href="https://ss.jiasucloud.com/blog/image/ybkc.jpg-s" target="_blank" rel="noopener" data-caption="游标卡尺" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/ybkc.jpg-s" alt="游标卡尺"></a></p>
+<h2 id="需求">需求<a class="post-anchor" href="#需求"></a></h2><p>在之前设计的数据结构中有一个js对象(js中的数组和对象以string形式保存在数据中).现在需要针对每一条记录进行重新设定,把js对象拆成单独的字段.</p>
+<p>比如,数据结构中有一个字段<code>fans</code>,保存的数据如下:</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">{<span class="hljs-string">"fans_id"</span>:<span class="hljs-number">123456</span>,<span class="hljs-string">"fans_name"</span>:<span class="hljs-string">"StoneRen"</span>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>现在需要拆成两个字段<code>fans_id</code>和<code>fans_name</code>.</p>
+<h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>针对这个问题,咋看还是比较简单的.比如这个需求没什么特殊的.步骤也简单,总共分散步:<code>1. 取回数据 2. 解析数据 3. 存储数据</code></p>
+<p>但问题出在咱们去下一个数据的问题上.按照正常逻辑,我取得一个总数,然后从0开始,逐渐<code>加一</code>就可以.但是问题就在于,如果中间id有删除的情况,那该如何判断?</p>
+<p>在我之前的逻辑中,设置<code>增长补偿</code>为50,<code>重试次数</code>为3次.示例如下:</p>
+<a id="more"></a>
+
+<ol>
+<li>从<code>id:1</code>开始,进行查询,结束后<code>id+1</code></li>
+<li>如果 <code>id:2</code> 没有查询到这个数据,重试3次</li>
+<li>然后在进行id自增,知道重试50个数字.如果没有的话,可以认定<code>id</code>已经是最大数字了(当然逻辑就是认为不可能删除连续50个id)</li>
+</ol>
+<p>这个从理论上没有问题,而且实际中运用起来也很有效.当然可以根据实际业务,调整<code>重试次数</code>和<code>增长补偿</code></p>
+<p>但作为处女座的开发者来说,这个方法有点愚笨.我们来吹毛求疵一下.<br><a href="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fae0b431b7g204x04x0ul.gif-s" target="_blank" rel="noopener" data-caption="吹毛求疵" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fae0b431b7g204x04x0ul.gif-s" alt="吹毛求疵"></a></p>
+<h2 id="游标">游标<a class="post-anchor" href="#游标"></a></h2><p>想起十年前刚接触编程时候,操作数据库的时候,能够针对游标进行逐条数据进行操作.这个方法虽然效率低,但是确实用起来很爽.</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 游标操作<br>do while not rec.eof<br>   //do something<br>   rec.movenext<br>loop<br></code></pre></td></tr></tbody></table></figure>
+
+<p>今天大体过了一遍<a href="https://github.com/mysqljs/mysql" target="_blank" rel="noopener">mysqljs</a>,没有发现针对游标的操作.难道真的不能逐条操作了吗.</p>
+<p>幸好,网上有同样需求的人.有两个办法.原来在此,<a href="https://stackoverflow.com/questions/36015279/how-to-use-node-mysql-without-loads-all-the-rows-into-the-memory" target="_blank" rel="noopener">How to use node-mysql without loads all the rows into the memory?</a></p>
+<h2 id="解决办法">解决办法<a class="post-anchor" href="#解决办法"></a></h2><h3 id="小步读取">小步读取<a class="post-anchor" href="#小步读取"></a></h3><p>这个和我上面说的思路大体是一致的.只不过他跳过了<code>增长补偿</code>.因为他每次去100条数据,跳过了中间可能缺失的id.但整体思路还是一样的.<br>这样有一个小缺点就是,我每次取100条数据,然后需要对100条数据异步处理完成之后再进行下一步操作.这个给程序增加了复杂度.</p>
+<h3 id="stream">stream<a class="post-anchor" href="#stream"></a></h3><p>nodejs的奇特之处体现出来了.直接看代码</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> stream = <span class="hljs-built_in">require</span>(<span class="hljs-string">'stream'</span>);<br><br>connection.query(<span class="hljs-string">'select * from bigdata'</span>)<br>  .stream()<br>  .pipe(stream.Transform({<br>    <span class="hljs-attr">objectMode</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">transform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">rows,encoding,callback</span>) </span>{<br>      rows.forEach(<span class="hljs-function"><span class="hljs-params">row</span> =></span> { <span class="hljs-comment">/* do something with each row */</span> })<br>      callback()<br>    }<br>   })<br>   .on(<span class="hljs-string">'finish'</span>,() => connection.end() )<br></code></pre></td></tr></tbody></table></figure>
+
+<p>我自己在实际应用中发现一个问题.在第7行,返回的是<code>row</code>而不是<code>rows</code>.也就是说数据是一条一条返回的,而不是一段一段返回的.</p>
+<p>具体可以查看我在<a href="https://gist.github.com/StoneRen/b64ff25b43903616ae095dea1961fc8c" target="_blank" rel="noopener">gist</a>上的代码.</p>
+<p>先来20条数据尝尝,图片比较大,慢慢加载.</p>
+<p><a href="https://ss.jiasucloud.com/blog/image/Kapture_2017-08-18.gif-s?e3" target="_blank" rel="noopener" data-caption="demo" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/Kapture_2017-08-18.gif-s?e3" alt="demo"></a></p>
+<p><strong>注意</strong>:上面<a href="https://gist.github.com/StoneRen/b64ff25b43903616ae095dea1961fc8c" target="_blank" rel="noopener">gist</a>实际上是有问题的,自己跑一下试一下,猜一下原因.</p>
+<p><del>有空把完整代码贴出来,稍微给大家解释一下吧.</del> 虽然不知道具体原因,但是问题已经解决,具体看<a href="/archive/nodejs逐条修改mysql数据-下/">下文</a>吧</p>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/nodejs%E9%80%90%E6%9D%A1%E4%BF%AE%E6%94%B9mysql%E6%95%B0%E6%8D%AE-%E4%B8%8B/">nodejs逐条修改mysql数据(下)</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/ejs%E4%B8%8Evue%E4%B8%AD%E6%A8%A1%E6%9D%BF%E4%B8%AD%E5%88%86%E9%9A%94%E7%AC%A6%E7%9A%84%E5%86%B2%E7%AA%81/">hexo与vue关于模板处理的冲突</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/nodejs%E4%B8%AD%E5%AF%B9mysql%E6%B8%B8%E6%A0%87%E7%9A%84%E6%93%8D%E4%BD%9C/">https://stoneren.github.io/article/nodejs%E4%B8%AD%E5%AF%B9mysql%E6%B8%B8%E6%A0%87%E7%9A%84%E6%93%8D%E4%BD%9C/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>

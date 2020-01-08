@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104993594-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104993594-1');
+</script>
+    
+    <title>
+      sails中的任务队列 - StoneRen
+    </title>
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原有方式"><span class="toc-text">原有方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <!-- <span class="iconfont icon-sousuo search-box menu-reset"></span> -->
+      <span class="icon-toc menu-reset">Nav</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          文章
+        </a>
+        
+        <a href="/photo" class="">
+          照片
+        </a>
+        
+        <a href="/digest" class="">
+          书摘
+        </a>
+        
+        <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+          github
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"> </a> -->
+        <div class="author"><a href="/">StoneRen</a></div>
+      </div>
+      <div class="nav">
+        <a href="/archives/">文章</a>
+        <a href="/photo/">记录</a>
+        <a href="/book/">读书</a>
+        <a href="/digest/">书摘</a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+        <div class="author">
+            <a href="/archives">
+              StoneRen
+            </a>
+          </div>
+          <!-- <a href="/" class="logo" style="background-image: url('/images/logo.jpg')"></a> -->
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            文章
+          </a>
+          
+          <a href="/photo" class="">
+            照片
+          </a>
+          
+          <a href="/digest" class="">
+            书摘
+          </a>
+          
+          <a href="https://github.com/stoneren" target="_blank" rel="noopener" class="">
+            github
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/stoneren" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">sails中的任务队列</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2017/07/31</span>
+        </span>
+
+
+        
+
+        
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/nodejs">nodejs</a>
+                  
+                
+                  
+                    <a href="/tags/sails">sails</a>
+                  
+                
+                  
+                    <a href="/tags/job">job</a>
+                  
+                
+                  
+                    <a href="/tags/async">async</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>先看一个最简单的需求.<br>用户申请直播间,管理员审核通过,审核通过后,创建直播间,并且通知用户.<br>在这过程中 <code>审核操作</code> <code>创建直播间</code>和<code>通知用户</code>,其实是三个<code>controller</code>干的事情,而且比如<code>通知用户</code>其实和<code>审核操作</code>的关系不是那么强烈.</p>
+<p>所以我的思路是,<code>审核操作</code>触发通知,订阅了该消息的任务自己去执行自己的逻辑,这样既减轻了耦合度,又让所有操作单独处理,还全都是异步,不会造成长久等待.</p>
+<h2 id="原有方式">原有方式<a class="post-anchor" href="#原有方式"></a></h2><figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = {<br>  pass(apply, cb) {<br>    <span class="hljs-comment">// ③ 开通直播间</span><br>    Live.create(live).exec(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, record</span>) </span>{<br>      <span class="hljs-keyword">if</span> (cb) cb(err, record);<br>      <span class="hljs-comment">// ④ 开通直播间后触发通知</span><br>    })<br>  },<br>  update(req, res) {<br>  <br>    <span class="hljs-keyword">var</span> id = req.params[<span class="hljs-string">'id'</span>];<br>    <span class="hljs-comment">// ① 管理员审核</span><br>    Apply.update({<br>      id<br>    }, {<br>      status<br>    }).exec(<span class="hljs-function">(<span class="hljs-params">err, updated</span>) =></span> {<br>      <span class="hljs-comment">// ② 审核通过</span><br>      <span class="hljs-keyword">this</span>.pass(updated[<span class="hljs-number">0</span>], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rec</span>) </span>{<br>        res.json({<br>          <span class="hljs-attr">code</span>: <span class="hljs-number">1</span>,<br>          <span class="hljs-attr">data</span>: rec,<br>          <span class="hljs-attr">msg</span>: <span class="hljs-string">'ok'</span><br>        })<br>      });<br>    });<br>  },<br>}<br></code></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<h2 id="解决方案">解决方案<a class="post-anchor" href="#解决方案"></a></h2><ol>
+<li><p>创建 <code>api/jobs/</code> 文件夹<br> 所有的任务触发都以单独文件的形式存放在这里</p>
+</li>
+<li><p>在启动时触发任务 </p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> includeAll = <span class="hljs-built_in">require</span>(<span class="hljs-string">'include-all'</span>);<br><span class="hljs-keyword">const</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>);<br><br><span class="hljs-keyword">var</span> jobs = includeAll({<br>  <span class="hljs-attr">dirname</span>: <span class="hljs-string">'api/jobs'</span>,<br>  <span class="hljs-attr">filter</span>: <span class="hljs-regexp">/(.+)\.js$/</span>,<br>  <span class="hljs-attr">optional</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">excludeDirs</span>: <span class="hljs-regexp">/^\.(git|svn)$/</span><br>});<br><br>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadJobs</span>(<span class="hljs-params"></span>) </span>{<br>  _.each(jobs, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">list, key</span>) </span>{<br>    sails.on(key, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{<br>      _.each(list, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">func</span>) </span>{<br>        func(data);<br>      })<br>    })<br>  })<br>})();<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="使用">使用<a class="post-anchor" href="#使用"></a></h2><ol>
+<li>创建任务</li>
+</ol>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//  api/jobs/apply.update.js</span><br><span class="hljs-built_in">module</span>.exports = [<br>  <span class="hljs-comment">// 开通直播间</span><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createLive</span>(<span class="hljs-params">apply</span>) </span>{<br>      Live.create(live).exec(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, record</span>) </span>{<br>        <span class="hljs-built_in">console</span>.log(record)<br>        <span class="hljs-keyword">if</span> (cb) cb(err, record);<br>      })<br>    }<br>  },<br>  <span class="hljs-comment">// 通知用户</span><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">noticeToUser</span>(<span class="hljs-params"></span>)</span>{<br>    <span class="hljs-comment">// TODO</span><br>  }<br>]<br></code></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>触发事件<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 在自己的业务逻辑中,触发事件<br>sails.emit('apply.update',updated[0]);<br></code></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+</body></html>
+
+
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/article/docker%E5%9C%A8%E5%9B%BD%E5%86%85%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8A%A0%E9%80%9F%E9%85%8D%E7%BD%AE/">docker在国内使用的加速配置</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">[翻译] promise的简单实现</a>
+        
+    </div>
+  </div>
+
+
+
+  <!-- <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://stoneren.github.io">StoneRen</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://stoneren.github.io/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">https://stoneren.github.io/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://stoneren.github.io">StoneRen</a>的博客，转载请注明出处！
+    </div>
+  </div> -->
+
+  <!-- <div id="comment"></div> -->
+
+
+</article>
+        <footer>
+          <div class="copyright">
+            ©2020
+            <a href="https://stoneren.github.io">StoneRen</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+  })</script>
