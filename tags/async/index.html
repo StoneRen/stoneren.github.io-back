@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      Tags - StoneRen
+      Tags - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -131,49 +131,155 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            Tags - async
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2017" >
-                2017
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/" title="[翻译] Async and Await (上)">
-                <span>2017/08/10</span>
-                <span>[翻译] Async and Await (上)</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/" title="sails中的任务队列">
-                <span>2017/07/31</span>
-                <span>sails中的任务队列</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <div class="posts">
+  <ul>
       
-<div class="paginator">
-    <span class="page-number current">1</span>
+    <li class="item">
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">[翻译] Async and Await (上)</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/08/10</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><blockquote>
+<p>原文地址:<a href="https://zeit.co/blog/async-and-await" target="_blank" rel="noopener">async and await</a></p>
+</blockquote>
+<p><code>javascript</code>,尤其是<code>node.js</code>经常与<a href="https://twitter.com/dr4goonis/status/476617165463105536" target="_blank" rel="noopener">回调地狱</a>相关联.你如果写过处理很多异步IO的代码,下面的形式你一定会非常熟悉:</p></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/nodejs"
+                  >nodejs</a
+                >
+                  
+                <a href="/tags/async"
+                  >async</a
+                >
+                  
+                <a href="/tags/javascript"
+                  >javascript</a
+                >
+                  
+                <a href="/tags/await"
+                  >await</a
+                >
+                  
+                <a href="/tags/callback hell"
+                  >callback hell</a
+                >
+                  
+                <a href="/tags/翻译"
+                  >翻译</a
+                >
+                  
+                <a href="/tags/promise"
+                  >promise</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+      
+    <li class="item">
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">sails中的任务队列</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/07/31</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>先看一个最简单的需求.<br>用户申请直播间,管理员审核通过,审核通过后,创建直播间,并且通知用户.<br>在这过程中 <code>审核操作</code> <code>创建直播间</code>和<code>通知用户</code>,其实是三个<code>controller</code>干的事情,而且比如<code>通知用户</code>其实和<code>审核操作</code>的关系不是那么强烈.</p>
+<p>所以我的思路是,<code>审核操作</code>触发通知,订阅了该消息的任务自己去执行自己的逻辑,这样既减轻了耦合度,又让所有操作单独处理,还全都是异步,不会造成长久等待.</p></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/nodejs"
+                  >nodejs</a
+                >
+                  
+                <a href="/tags/sails"
+                  >sails</a
+                >
+                  
+                <a href="/tags/job"
+                  >job</a
+                >
+                  
+                <a href="/tags/async"
+                  >async</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/sails%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    
+  </ul>
 </div>
+<div class="paginator">
+  <span class="page-number current">1</span>
 </div>
 
         <footer>
@@ -191,7 +297,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -216,5 +322,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

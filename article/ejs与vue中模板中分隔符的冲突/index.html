@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      hexo与vue关于模板处理的冲突 - StoneRen
+      hexo与vue关于模板处理的冲突 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -183,13 +183,13 @@
     </div>
     <html><head></head><body><h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>今天在写blog过程中,新上了自己的<a href="/book/">读书频道</a>.结果碰到了下面的问题.</p>
 <p>先看代码部分:</p>
+<a id="more"></a>
+
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"book-box"</span>></span><br>  <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"(book,index) in books"</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">"index"</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">h2</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">"!books[index - 1] || books[index - 1].date !== book.date"</span>></span>{{ book.date }}<span class="hljs-tag"></<span class="hljs-name">h2</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"photo-href"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>></span><br>      <span class="hljs-tag"><<span class="hljs-name">figure</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">"qnroot+book.url+'-sm'"</span> <span class="hljs-attr">:alt</span>=<span class="hljs-string">"book.title"</span> <span class="hljs-attr">:data-target</span>=<span class="hljs-string">"qnroot+book.url+'-p'"</span>></span><br>      <span class="hljs-tag"></<span class="hljs-name">figure</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">a</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"review"</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">p</span>></span><span class="hljs-tag"><<span class="hljs-name">strong</span>></span>{{book.title}}<span class="hljs-tag"></<span class="hljs-name">strong</span>></span><span class="hljs-tag"></<span class="hljs-name">p</span>></span><br>        <span class="hljs-tag"><<span class="hljs-name">p</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">"book.review"</span>></span><span class="hljs-tag"></<span class="hljs-name">p</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"clearfix"</span>></span><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">p</span>></span><br>      购买链接: <span class="hljs-tag"><<span class="hljs-name">a</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"(h,i) in book.store"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"blank"</span> <span class="hljs-attr">:href</span>=<span class="hljs-string">"h.url+'&from=jsfun.info'"</span>></span>{{h.key}}<span class="hljs-tag"></<span class="hljs-name">a</span>></span><br>    <span class="hljs-tag"></<span class="hljs-name">p</span>></span><br>  <span class="hljs-tag"></<span class="hljs-name">div</span>></span><br><span class="hljs-tag"></<span class="hljs-name">div</span>></span><br></code></pre></td></tr></tbody></table></figure>
 
 <p>很正常的代码,结果其他地方都正常,循环啊,条件判断都很正常.就是简单的<code>{{`和`}}</code>类似最简单的地方全都为空,全都无法正常显示.</p>
 <p>哎,最终无语了,我都把分隔符分开显示了,竟然<code>hexo</code>还是要去给我解析.如果上面那段话你没看明白,去看下面的截图吧.<br>自己感受吧.我的编辑器能正常解析,但是在<code>hexo</code>中还是要去解析中间的字符啊.我对你的坚强佩服的五体投地.</p>
 <p><a href="https://ss.jiasucloud.com/blog/image/WX20170816-201122.png-s" target="_blank" rel="noopener" data-caption="hexo对字符的坚强解析" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/WX20170816-201122.png-s" alt="hexo对字符的坚强解析"></a></p>
-<a id="more"></a>
-
 <h2 id="原因">原因<a class="post-anchor" href="#原因"></a></h2><p>一开始以为,自己不小心,那个变量写错了.但看了几次都没发现问题.<br>后来一琢磨应该是和<code>hexo</code>的模板冲突了.因为博客会先解析<code>ejs</code>再由页面中的<code>vue</code>来进行解析的.</p>
 <p>查看一下,果然,<code>ejs</code>报错了.</p>
 <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">INFO  Start processing<br>FATAL Something<span class="hljs-string">'s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html<br>Template render error: (unknown path) [Line 65, Column 8]<br>  unexpected token: }}</span><br></code></pre></td></tr></tbody></table></figure>
@@ -261,7 +261,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -286,5 +286,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

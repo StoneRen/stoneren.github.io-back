@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      nginx静态服务器405报错 - StoneRen
+      nginx静态服务器405报错 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -181,13 +181,12 @@
 <p>nginx解决跨域问题,配置还是比较简单的,解决如下: </p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs conf">add_header 'Access-Control-Allow-Origin' '*';<br>add_header 'Access-Control-Allow-Credentials' 'true';<br>add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';<br></code></pre></td></tr></tbody></table></figure>
 
+<a id="more"></a>
 <p>解决完跨域问题后,出现了<code>405</code>错误,如下</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">OPTIONS http://URL 405 (Not Allowed)<br>Failed to load http://URL: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:7077' is therefore not allowed access. The response had HTTP status code 405.<br></code></pre></td></tr></tbody></table></figure>
 
 <p>这是因为nginx搭建的静态服务器,只能使用<code>GET</code>方法,其他方法都是不被允许的.而我们现在要用<code>POST</code>方法来请求,顺带着又出来一个<code>OPTONS</code>请求.</p>
 <p><code>OPTINS</code>请求又引发了跨域,增加如下配置:</p>
-<a id="more"></a>
-
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';<br></code></pre></td></tr></tbody></table></figure>
 
 <p>关于为啥<code>post请求会携带optins请求</code>,可以看这篇文章<a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&mid=100000054&idx=1&sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd" target="_blank" rel="noopener">99%的人都理解错了HTTP中GET与POST的区别</a></p>
@@ -243,7 +242,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -268,5 +267,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

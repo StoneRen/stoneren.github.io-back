@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      js中利用矩阵思想来进行压缩编码 - StoneRen
+      js中利用矩阵思想来进行压缩编码 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -186,12 +186,13 @@
       </div>
     </div>
     <html><head></head><body><h2 id="需求">需求<a class="post-anchor" href="#需求"></a></h2><p>要生成一个<code>码A</code>,共12位,只能包含字符和数字.其中要包括<code>要素A</code>,8位十进制数字(id),未来肯定会增大.<code>要素B</code>,9位十进制数字(id),以后也肯定会增大.</p>
+<a id="more"></a>
+
+
 <p>要想在12位的字符<code>码A</code>中,包含两个要素.如果直接把他们的id添加进来,肯定超出了<code>码A</code>的承载(8+9>12).所以我想到了对<code>要素A</code>和<code>要素B</code>进行压缩.</p>
 <p><strong>题外话</strong>:为啥你的需求总是那么难以捉摸?你要知道基本上所有都是我一个人在整理需求和开发整个技术(前端后端运维)的时,关键还有第三方数据的牵扯,你是不是能稍微理解点了.</p>
 <p><a href="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fatxdztsvqj206o06odge.jpg-s?jpg" target="_blank" rel="noopener" data-caption="理解" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/9150e4e5gw1fatxdztsvqj206o06odge.jpg-s?jpg" alt="理解"></a></p>
-<h2 id="分析">分析<a class="post-anchor" href="#分析"></a></h2><a id="more"></a>
-
-<p>先想到压缩2位或者压缩3位,压缩后的个数需要固定位数.举例如下:</p>
+<h2 id="分析">分析<a class="post-anchor" href="#分析"></a></h2><p>先想到压缩2位或者压缩3位,压缩后的个数需要固定位数.举例如下:</p>
 <p>如: <code>要素A</code>为<code>12345678</code> <code>要素B</code>为<code>123456789</code></p>
 <p><code>两两压缩</code><br><code>要素A</code>变为 [12,34,56,78],只要用一个符号(可以是数字或者字符,可能是单个也可能是组合)2位数的话,那么这个<code>要素A</code>就变成了4位.</p>
 <p><code>三三压缩</code>,<br>同理,<code>要素A</code>变为[123,456,78],压缩后就只有3位了</p>
@@ -283,7 +284,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -308,5 +309,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

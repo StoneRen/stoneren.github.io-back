@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      nodejs中对mysql游标的操作 - StoneRen
+      nodejs中对mysql游标的操作 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -186,6 +186,8 @@
       </div>
     </div>
     <html><head></head><body><p>[题外]你还记得当年的<a href="https://baike.baidu.com/item/游标卡尺/2768806?from=jsfun.info" target="_blank" rel="noopener">游标卡尺</a>吗?当时我对这玩意的设计者真是极其的佩服<br><a href="https://ss.jiasucloud.com/blog/image/ybkc.jpg-s" target="_blank" rel="noopener" data-caption="游标卡尺" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/ybkc.jpg-s" alt="游标卡尺"></a></p>
+<a id="more"></a>
+
 <h2 id="需求">需求<a class="post-anchor" href="#需求"></a></h2><p>在之前设计的数据结构中有一个js对象(js中的数组和对象以string形式保存在数据中).现在需要针对每一条记录进行重新设定,把js对象拆成单独的字段.</p>
 <p>比如,数据结构中有一个字段<code>fans</code>,保存的数据如下:</p>
 <figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">{<span class="hljs-string">"fans_id"</span>:<span class="hljs-number">123456</span>,<span class="hljs-string">"fans_name"</span>:<span class="hljs-string">"StoneRen"</span>}<br></code></pre></td></tr></tbody></table></figure>
@@ -194,8 +196,6 @@
 <h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>针对这个问题,咋看还是比较简单的.比如这个需求没什么特殊的.步骤也简单,总共分散步:<code>1. 取回数据 2. 解析数据 3. 存储数据</code></p>
 <p>但问题出在咱们去下一个数据的问题上.按照正常逻辑,我取得一个总数,然后从0开始,逐渐<code>加一</code>就可以.但是问题就在于,如果中间id有删除的情况,那该如何判断?</p>
 <p>在我之前的逻辑中,设置<code>增长补偿</code>为50,<code>重试次数</code>为3次.示例如下:</p>
-<a id="more"></a>
-
 <ol>
 <li>从<code>id:1</code>开始,进行查询,结束后<code>id+1</code></li>
 <li>如果 <code>id:2</code> 没有查询到这个数据,重试3次</li>
@@ -267,7 +267,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -292,5 +292,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

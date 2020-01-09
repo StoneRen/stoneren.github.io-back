@@ -166,6 +166,7 @@
 .post-entry .highlight,
 .post-wrap .highlight {
   padding: 0.75rem;
+  overflow-x: hidden;
   border-radius: 0.35rem;
 }
 .post-entry pre,
@@ -175,11 +176,24 @@
   font-size: 0.75rem;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
-.post-entry code:not(.highlight),
-.post-wrap code:not(.highlight) {
-  color: #1565c0;
+.post-entry .highlight .gutter,
+.post-wrap .highlight .gutter {
+  background: #fdf6e3;
+  border-right: #fff 1px solid;
+}
+.post-entry pre .line:before,
+.post-wrap pre .line:before {
+  content: " ";
+}
+.post-entry pre .line:after,
+.post-wrap pre .line:after {
+  content: ". ";
+}
+.post-entry code:not(.hljs),
+.post-wrap code:not(.hljs) {
+  color: #fff;
   margin: 0 0.2rem;
-  background: #e3f2fd;
+  background: #321136;
   padding: 0.2rem;
   border-radius: 0.3rem;
   border: 1px solid #eee;
@@ -224,8 +238,8 @@
   border-bottom: 3px solid #ddd;
   padding-bottom: 0.5em;
 }
-.post-entry td,
-.post-wrap td {
+.post-entry td:not(td.gutter),
+.post-wrap td:not(td.gutter) {
   padding: 10px 0;
 }
 .post-entry blockquote,

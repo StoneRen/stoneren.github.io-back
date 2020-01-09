@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      Tags - StoneRen
+      Tags - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -131,40 +131,84 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            Tags - orm
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2017" >
-                2017
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/" title="sails中正式环境的数据库迁移">
-                <span>2017/07/24</span>
-                <span>sails中正式环境的数据库迁移</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <div class="posts">
+  <ul>
       
-<div class="paginator">
-    <span class="page-number current">1</span>
+    <li class="item">
+      
+      <div class="top">
+        <div
+          class="iconfont icon-zuirehotxiankuang animated infinite tada"
+        ></div>
+      </div>
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">sails中正式环境的数据库迁移</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/07/24</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><p>在我的上一篇文章 <a href="https://stoneren.github.io/2017/07/21/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a> 中,在结尾处埋了一个坑.当时也说了是一个妥协方案.</p>
+<p>今天正式按照上面的思路来说一下新的解决方案.</p>
+<h2 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h2><p>在<code>sails</code>中,自带的<code>orm</code>系统<a href="http://github.com/balderdashy/waterline" target="_blank" rel="noopener">waterline</a>中会对数据的完整性进行检测.但是其中有一个缺点就是在检测的过程,可能会发生<code>数据丢失</code>的严重问题.所以官方也验证声明,一定不要在<code>prod环境</code>和<code>你十分在意的数据</code>情况下使用自动升级方式.具体原因查看文章 <a href="https://stoneren.github.io/2017/07/21/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a>.</p></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/jenkins"
+                  >jenkins</a
+                >
+                  
+                <a href="/tags/sails"
+                  >sails</a
+                >
+                  
+                <a href="/tags/orm"
+                  >orm</a
+                >
+                  
+                <a href="/tags/mysqldiff"
+                  >mysqldiff</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/sails%E4%B8%AD%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    
+  </ul>
 </div>
+<div class="paginator">
+  <span class="page-number current">1</span>
 </div>
 
         <footer>
@@ -182,7 +226,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -207,5 +251,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

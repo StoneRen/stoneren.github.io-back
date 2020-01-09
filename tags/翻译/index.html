@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      Tags - StoneRen
+      Tags - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -131,49 +131,156 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            Tags - 翻译
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2017" >
-                2017
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/" title="[翻译] Async and Await (上)">
-                <span>2017/08/10</span>
-                <span>[翻译] Async and Await (上)</span>
-            </a>
-            </article>
-            
-
-
-            <article class="item">
-            <a href="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/" title="[翻译] promise的简单实现">
-                <span>2017/07/28</span>
-                <span>[翻译] promise的简单实现</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <div class="posts">
+  <ul>
       
-<div class="paginator">
-    <span class="page-number current">1</span>
+    <li class="item">
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">[翻译] Async and Await (上)</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/08/10</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><blockquote>
+<p>原文地址:<a href="https://zeit.co/blog/async-and-await" target="_blank" rel="noopener">async and await</a></p>
+</blockquote>
+<p><code>javascript</code>,尤其是<code>node.js</code>经常与<a href="https://twitter.com/dr4goonis/status/476617165463105536" target="_blank" rel="noopener">回调地狱</a>相关联.你如果写过处理很多异步IO的代码,下面的形式你一定会非常熟悉:</p></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/nodejs"
+                  >nodejs</a
+                >
+                  
+                <a href="/tags/async"
+                  >async</a
+                >
+                  
+                <a href="/tags/javascript"
+                  >javascript</a
+                >
+                  
+                <a href="/tags/await"
+                  >await</a
+                >
+                  
+                <a href="/tags/callback hell"
+                  >callback hell</a
+                >
+                  
+                <a href="/tags/翻译"
+                  >翻译</a
+                >
+                  
+                <a href="/tags/promise"
+                  >promise</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/%E7%BF%BB%E8%AF%91-Async-and-Await_%E4%B8%8A/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+      
+    <li class="item">
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">[翻译] promise的简单实现</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/07/28</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><p>本文对<a href="https://www.promisejs.org/implementing" target="_blank" rel="noopener">https://www.promisejs.org/implementing</a>进行了简单的翻译,各位看官慢慢端详.</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本篇文章是作为<a href="http://stackoverflow.com/questions/23772801/basic-javascript-promise-implementation-attempt/23785244#23785244" target="_blank" rel="noopener">Stack Overflow</a>的答案而写的.希望你通过了解如何在js中实现<code>Promise</code>,能让你更好的理解<code>promise</code>行为.</p>
+<h2 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h2><p>鉴于<code>Promise</code>就是一个状态机,我们应该先创建之后需要的状态信息</p></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/nodejs"
+                  >nodejs</a
+                >
+                  
+                <a href="/tags/js"
+                  >js</a
+                >
+                  
+                <a href="/tags/翻译"
+                  >翻译</a
+                >
+                  
+                <a href="/tags/promise"
+                  >promise</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/%E7%BF%BB%E8%AF%91-promise%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    
+  </ul>
 </div>
+<div class="paginator">
+  <span class="page-number current">1</span>
 </div>
 
         <footer>
@@ -191,7 +298,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -216,5 +323,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

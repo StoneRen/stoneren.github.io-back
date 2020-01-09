@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      vscode下vue多属性换行设置 - StoneRen
+      vscode下vue多属性换行设置 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -168,6 +168,8 @@
 <blockquote>
 <p>Elements with multiple attributes should span multiple lines, with one attribute per line.</p>
 </blockquote>
+<a id="more"></a>
+
 <p>示例如下:</p>
 <blockquote>
 <p>Bad</p>
@@ -177,7 +179,10 @@
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag"><<span class="hljs-name">img</span><br>  <span class="hljs-attr">src</span>=<span class="hljs-string">"https://vuejs.org/images/logo.png"</span><br>  <span class="hljs-attr">alt</span>=<span class="hljs-string">"Vue Logo"</span></span><br></code></pre></td></tr></tbody></table></figure>
 </blockquote>
 <p><mycomponent foo="a" bar="b" baz="c"></mycomponent></p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br>但是在`vscode`中,进行格式化,却得不到官方指导的效果,经过多方查找,终于找到解决方案.<br><br><!-- more --><br><br>[github issue#561](https://github.com/vuejs/vetur/issues/561)<br><br>具体配置如下:<br><br>```json<br>"vetur.format.defaultFormatter.html": "js-beautify-html",<br>"vetur.format.defaultFormatterOptions": {<br>    "js-beautify-html": {<br>      "wrap_attributes": "force-aligned"<br>    }<br>},<br></code></pre></td></tr></tbody></table></figure>
+<p>但是在<code>vscode</code>中,进行格式化,却得不到官方指导的效果,经过多方查找,终于找到解决方案.</p>
+<p><a href="https://github.com/vuejs/vetur/issues/561" target="_blank" rel="noopener">github issue#561</a></p>
+<p>具体配置如下:</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json">"vetur.format.defaultFormatter.html": "js-beautify-html",<br>"vetur.format.defaultFormatterOptions": {<br>    "js-beautify-html": {<br>      "wrap_attributes": "force-aligned"<br>    }<br>},<br></code></pre></td></tr></tbody></table></figure>
 
 <p>ok,大功告成</p>
 </body></html>
@@ -229,7 +234,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -254,5 +259,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

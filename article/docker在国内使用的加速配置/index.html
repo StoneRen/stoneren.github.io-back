@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      docker在国内使用的加速配置 - StoneRen
+      docker在国内使用的加速配置 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -184,11 +184,12 @@
     <html><head></head><body><p>在国内使用docker,如果你不是自建私有仓库,慢的让你想拿起键盘来砸电脑屏幕.</p>
 <p>我就记录一下国内的加速方案吧.因为我手头是mac,全部以mac环境为准.国内镜像话,去阿里云或者其他容器镜像服务里面找一家.</p>
 <p>其实ubuntu下的网上教程很多,就是<code>mac</code>的麻烦点.</p>
+<a id="more"></a>
+
 <h2 id="下载">下载<a class="post-anchor" href="#下载"></a></h2><p>进入阿里云<a href="http://mirrors.aliyun.com/docker-toolbox/mac/docker-for-mac/?spm=a2c1q.8351553.0.0.102c439cKYeWUN" target="_blank" rel="noopener">下载加速地址</a>.然后进行安装</p>
 <h2 id="问题">问题<a class="post-anchor" href="#问题"></a></h2><p>在<code>win</code>和<code>ubuntu</code>下都有相应的配置,具体可查看<a href="https://docs.docker.com/registry/recipes/mirror/#configure-the-cache" target="_blank" rel="noopener">官方指导</a>.但在<code>mac</code>下,上面介绍的方法<code>--registry-mirrors</code>和修改<code>/etc/docker/daemon.json</code>在我这里都没有起作用.</p>
 <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">➜ docker --registry-mirror=https://registry.docker-cn.com -d<br><br><span class="hljs-comment"># 执行结果</span><br>unknown flag: --registry-mirror<br>See <span class="hljs-string">'docker --help'</span>.<br></code></pre></td></tr></tbody></table></figure>
 
-<a id="more"></a>
 
 <p>修改<code>/etc/docker/daemon.json</code>也没有起作用</p>
 <h2 id="mac下配置">mac下配置<a class="post-anchor" href="#mac下配置"></a></h2><p>现在这个方法,对我来说是可行的,记录一下.</p>
@@ -269,7 +270,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -294,5 +295,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

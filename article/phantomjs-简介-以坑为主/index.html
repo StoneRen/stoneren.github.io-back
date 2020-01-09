@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      phantomjs 简介 - 以坑为主 - StoneRen
+      phantomjs 简介 - 以坑为主 - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -180,11 +180,12 @@
     <html><head></head><body><p><a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>,<code>Full web stack,No browser required</code>.</p>
 <p><a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>基于<code>webkit</code>内核,来编译解释执行javascript代码.比如执行批量脚本的时候,不需要浏览器,只需要借助<a href="http://phantomjs.org/" target="_blank" rel="noopener">phantomjs</a>就可以执行网页中的js代码了.本文基于官网现在的<code>2.1</code>版本.</p>
 <p>因为官网的文档算是烂到家了,所以本文中的很多问题,估计你都会碰到,并且可能会像我一样抓狂.<a href="https://ss.jiasucloud.com/blog/image/9150e4e5ly1fg4oyrvkjbg201e01e3yw.gif-s" target="_blank" rel="noopener" data-caption="抓狂" data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/9150e4e5ly1fg4oyrvkjbg201e01e3yw.gif-s" alt="抓狂"></a></p>
+<a id="more"></a>
+
 <p>最开始文章标题是<code>phantomjs简介</code>,但是在是被肯坏了.下面调试那个坑,你肯定会碰到.</p>
 <p>当然,抓狂过后,解决完问题后的那种心情也是只有自己能体会.</p>
 <p><a href="https://ss.jiasucloud.com/blog/image/1fd6e8617007011a041b009067051636.gif-s" target="_blank" rel="noopener" data-caption data-fancybox="images"><img src="https://ss.jiasucloud.com/blog/image/1fd6e8617007011a041b009067051636.gif-s" alt></a></p>
 <p>本文包含以下内容: <code>安装</code> <code>示例</code> <code>回调</code>和重点介绍的<code>调试</code>部分.</p>
-<a id="more"></a>
 <h2 id="安装">安装<a class="post-anchor" href="#安装"></a></h2><p>安装比较简单,下载编译后的文件和自己从源码编译.重点介绍一下下载安装,因为这是我的执行过程,想编译安装的,请访问<a href="http://phantomjs.org/build.html" target="_blank" rel="noopener">官网</a></p>
 <h3 id="下载">下载<a class="post-anchor" href="#下载"></a></h3><p>到<a href="http://phantomjs.org/download.html" target="_blank" rel="noopener">官网</a>按照你的系统选择合适的文件进行下载.<br><a href="https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-macosx.zip" target="_blank" rel="noopener">phantomjs on MacOS</a>,大约<code>16.84MB</code></p>
 <blockquote>
@@ -292,7 +293,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -317,5 +318,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>

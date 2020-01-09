@@ -16,7 +16,7 @@
 </script>
     
     <title>
-      Tags - StoneRen
+      Tags - StoneRen - 让网络为人们提供更大的便捷
     </title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     
@@ -131,40 +131,103 @@
     </div>
     <div id="container">
       <div class="main animated bounceInRight delay-0.7s">
-        <div id="archives">
-    
-        <div class="title">
-            Tags - alter
-        </div>
-    
-
-
-
-
-    
-    
-    <section class="wrap">
-        <div class="meta">
-            <a href="/archives/2017" >
-                2017
-            </a>
-        </div>
-        <div class="year">
-            
-            <article class="item">
-            <a href="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/" title="sailsjs中的数据迁移方式">
-                <span>2017/07/21</span>
-                <span>sailsjs中的数据迁移方式</span>
-            </a>
-            </article>
-            
-    
-        </div>
-    </section>
+        <div class="posts">
+  <ul>
       
-<div class="paginator">
-    <span class="page-number current">1</span>
+    <li class="item">
+       
+      <div class="describe">
+        <div class="title">
+          <a href="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">sailsjs中的数据迁移方式</a>
+        </div>
+        <div class="date">
+          <span class="iconfont icon-time-circle"></span>
+          <span>17/07/21</span>
+        </div>
+        
+        <div class="excerpt post-wrap"><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>在<code>sailsjs</code>中,有三种数据迁移方式: <code>safe</code>,<code>alter</code>和<code>drop</code>.在开发环境和测试环境中,直接使用<code>alter</code>会很方便的进行数据的迁移.</p>
+<p>官方对三种方式的说明 <a href="http://sailsjs.com/documentation/concepts/models-and-orm/model-settings#?database-migrations" target="_blank" rel="noopener">具体可查看此链接</a></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>方式</strong></th>
+<th align="left"><strong>解释</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>safe</code></td>
+<td align="left">系统不会主动迁移数据(库),必须手动操作</td>
+</tr>
+<tr>
+<td align="left"><code>alter</code></td>
+<td align="left">自动迁移数据字段,并试图保存现有数据</td>
+</tr>
+<tr>
+<td align="left"><code>drop</code></td>
+<td align="left">每次启动系统时,删除所有数据,并且每次重建model</td>
+</tr>
+</tbody></table>
+<p>在实际工作中碰到两个问题</p>
+<ol>
+<li><code>alter</code>方式中,当数据库中有比较多的数据的时候(其实也不多,比如6000个用户),在网速情况不好的情况,会出现两个问题.</li>
+<li>在正式环境中,无法使用<code>alter</code>,导致在正式环境下,必须手动进行数据库的表结构修改.</li>
+</ol>
+<h2 id="alter的两个问题"><a href="#alter的两个问题" class="headerlink" title="alter的两个问题"></a><code>alter</code>的两个问题</h2></div>
+        
+        <div class="meta">
+          <div class="l">
+            <div class="warp">
+              
+              <span class="iconfont icon-folder"></span>
+              <span class="desp">
+                
+              </span>
+              
+            </div>
+            
+            <div class="warp">
+              <span class="iconfont icon-tag1"></span>
+              <span class="desp">
+                 
+                <a href="/tags/sails"
+                  >sails</a
+                >
+                  
+                <a href="/tags/model"
+                  >model</a
+                >
+                  
+                <a href="/tags/alter"
+                  >alter</a
+                >
+                  
+                <a href="/tags/mysqldump"
+                  >mysqldump</a
+                >
+                 
+              </span>
+            </div>
+            
+            <div class="warp">
+              <div class="share" data-url="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">
+                <span class="iconfont icon-share"></span>
+              </div>
+              <div class="desp share" data-url="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">
+                <a href="#">分享</a>
+              </div>
+            </div>
+          </div>
+          <div class="r">
+            <a href="/article/sailsjs%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E5%BC%8F/">Read More</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    
+  </ul>
 </div>
+<div class="paginator">
+  <span class="page-number current">1</span>
 </div>
 
         <footer>
@@ -182,7 +245,7 @@
 <script type="text/javascript">
                   window.HUHU_CONFIG = JSON.parse("{\"service_worker\":{\"open\":false}}")
                 </script> <script type="text/javascript">window.addEventListener('load', function() {
-    
+
     window.loadJs = function(d, m, a) {
       var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
       var b = document.createElement('script')
@@ -207,5 +270,5 @@
       }
       c.appendChild(b)
     }
-    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","hljs":["https://unpkg.com/hljs@6.2.3/hljs"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]}},"waitSeconds":3})})
   })</script>
