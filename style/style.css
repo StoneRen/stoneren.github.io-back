@@ -1942,6 +1942,15 @@ a {
   -webkit-align-items: center;
   align-items: center;
 }
+#header .nav {
+  display: flex;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+#header .nav a {
+  margin: 0 3px;
+}
 #header .logo {
   width: 2rem;
   height: 2rem;
