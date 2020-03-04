@@ -195,6 +195,7 @@ var pswpElement;
 var gallery;
 
 function resizeImg(index, item) {
+  console.log(index,item)
   if (!item.loaded2) {
     var img = new Image();
     img.onload = function() {
@@ -229,11 +230,16 @@ var app = new Vue({
   },
   methods: {
     view(index) {
+      let headerEle = document.getElementById("header")
+      headerEle.style.position="relative";
       gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, this.items, {
         index: index
       });
-      gallery.init();
-      gallery.listen("imageLoadComplete", resizeImg);
+      setTimeout(() => {
+        gallery.init();
+        gallery.listen("imageLoadComplete", resizeImg);
+      }, 0);
+
     },
     render() {
       var index = (this.page - 1) * this.limit;
